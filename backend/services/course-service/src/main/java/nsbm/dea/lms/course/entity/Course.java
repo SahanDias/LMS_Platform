@@ -11,6 +11,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String courseCode;
     private String title;
     private String description;
     private String thumbnailImgUrl;
@@ -22,8 +23,9 @@ public class Course {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Course(Long id, String title, String description, String thumbnailImgUrl, BigDecimal price, int passingPercentage, boolean certificationEnabled, String status, Long createdBy, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Course(Long id, String courseCode, String title, String description, String thumbnailImgUrl, BigDecimal price, int passingPercentage, boolean certificationEnabled, String status, Long createdBy, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
+        this.courseCode = courseCode;
         this.title = title;
         this.description = description;
         this.thumbnailImgUrl = thumbnailImgUrl;
@@ -45,6 +47,14 @@ public class Course {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getTitle() {
