@@ -5,19 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/service_class-schedule.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/Rasa/Downloads/service_class-schedule/backend/services/video-service" value="39D7RwgjdGzYKYCeR71HDcebA90" />
+    </persistenceIdMap>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,6 +61,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="39D7RwgjdGzYKYCeR71HDcebA90" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -66,6 +79,7 @@
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.Application.executor": "Run",
@@ -116,10 +130,30 @@
       <workItem from="1770218784062" duration="9502000" />
       <workItem from="1770524294626" duration="4006000" />
       <workItem from="1771162081908" duration="1714000" />
+      <workItem from="1771948396398" duration="1605000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>
