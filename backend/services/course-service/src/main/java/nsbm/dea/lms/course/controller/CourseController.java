@@ -1,12 +1,12 @@
 package nsbm.dea.lms.course.controller;
 
-import nsbm.dea.lms.course.entity.Course;
+import nsbm.dea.lms.course.dto.CourseDTO;
 import nsbm.dea.lms.course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/course")
@@ -16,32 +16,35 @@ public class CourseController {
 
     // Get all courses
     @GetMapping
-    public List<Course> getAllCourses() {
-        return courseService.getCourses();
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        return ResponseEntity.ok(courseService.getCourses());
     }
 
     // Get course by ID
     @GetMapping("/{id}")
-    public Optional<Course> getCourseById(@PathVariable Long id) {
-        return courseService.getCourseById(id);
+    public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // Create a new course
     @PostMapping
-    public Course createCourse(@RequestBody Course course) {
-        return courseService.createCourse(course);
+    public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO courseDTO) {
+        CourseDTO created = courseService.createCourse(courseDTO);
+        return ResponseEntity.status(201).body(created);
     }
 
     // Update course by ID
     @PutMapping("/{id}")
-    public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
-        return courseService.updateCourse(id, course);
+    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id, @RequestBody CourseDTO courseDTO) {
+        return ResponseEntity.ok(courseService.updateCourse(id, courseDTO));
     }
 
     // Delete course by ID
     @DeleteMapping("/{id}")
-    public String deleteCourse(@PathVariable Long id) {
+    public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
-        return "Course with id " + id + " deleted successfully!";
+        return ResponseEntity.ok("Course with id " + id + " deleted successfully!");
     }
 }

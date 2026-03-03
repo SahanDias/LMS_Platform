@@ -1,12 +1,16 @@
 package nsbm.dea.lms.course.service;
 
+import nsbm.dea.lms.course.dto.CourseDTO;
 import nsbm.dea.lms.course.entity.Course;
+import nsbm.dea.lms.course.exception.CourseNotFoundException;
+import nsbm.dea.lms.course.mapper.CourseMapper;
 import nsbm.dea.lms.course.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -14,24 +18,30 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     // Get all courses
-    public List<Course> getCourses() {
-        return courseRepository.findAll();
+    public List<CourseDTO> getCourses() {
+        return courseRepository.findAll()
+                .stream()
+                .map(CourseMapper::courseDTO)
+                .collect(Collectors.toList());
     }
 
     // Get course by ID
-    public Optional<Course> getCourseById(Long id) {
-        return courseRepository.findById(id);
+    public Optional<CourseDTO> getCourseById(Long id) {
+        return courseRepository.findById(id)
+                .map(CourseMapper::courseDTO);
     }
 
     // Create a new course
-    public Course createCourse(Course course) {
-        return courseRepository.save(course);
+    public CourseDTO createCourse(CourseDTO courseDTO) {
+        Course course = CourseMapper.toEntity(courseDTO);
+        Course saved = courseRepository.save(course);
+        return CourseMapper.courseDTO(saved);
     }
 
     // Update existing course
-    public Course updateCourse(Long id, Course courseDetails) {
+    public CourseDTO updateCourse(Long id, CourseDTO courseDetails) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+                .orElseThrow(() -> new CourseNotFoundException(id));
 
         course.setTitle(courseDetails.getTitle());
         course.setDescription(courseDetails.getDescription());
@@ -43,13 +53,14 @@ public class CourseService {
         course.setCreatedBy(courseDetails.getCreatedBy());
         course.setUpdatedAt(courseDetails.getUpdatedAt());
 
-        return courseRepository.save(course);
+        Course updated = courseRepository.save(course);
+        return CourseMapper.courseDTO(updated);
     }
 
     // Delete course
     public void deleteCourse(Long id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+                .orElseThrow(() -> new CourseNotFoundException(id));
         courseRepository.delete(course);
     }
 }
