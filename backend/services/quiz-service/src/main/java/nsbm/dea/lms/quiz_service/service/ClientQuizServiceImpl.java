@@ -1,0 +1,137 @@
+package nsbm.dea.lms.quiz_service.service;
+
+import nsbm.dea.lms.quiz_service.dto.AnswerOptionResponse;
+import nsbm.dea.lms.quiz_service.dto.QuestionViewResponse;
+import nsbm.dea.lms.quiz_service.dto.QuizSummaryResponse;
+import nsbm.dea.lms.quiz_service.dto.StartQuizResponse;
+import nsbm.dea.lms.quiz_service.entity.Answer;
+import nsbm.dea.lms.quiz_service.entity.Question;
+import nsbm.dea.lms.quiz_service.entity.Quiz;
+import nsbm.dea.lms.quiz_service.entity.QuizQuestion;
+import nsbm.dea.lms.quiz_service.entity.QuizStatus;
+import nsbm.dea.lms.quiz_service.exception.ResourceNotFoundException;
+import nsbm.dea.lms.quiz_service.repository.AnswerRepository;
+import nsbm.dea.lms.quiz_service.repository.QuestionRepository;
+import nsbm.dea.lms.quiz_service.repository.QuizQuestionRepository;
+import nsbm.dea.lms.quiz_service.repository.QuizRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+  Implements ClientQuizService
+  Uses repositories to read quiz data for students.
+*/
+
+@Service
+public class ClientQuizServiceImpl implements ClientQuizService {
+
+    private final QuizRepository quizRepository;
+    private final QuizQuestionRepository quizQuestionRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
+
+    // Constructor injection (recommended)
+    public ClientQuizServiceImpl(QuizRepository quizRepository,
+                                 QuizQuestionRepository quizQuestionRepository,
+                                 QuestionRepository questionRepository,
+                                 AnswerRepository answerRepository) {
+        this.quizRepository = quizRepository;
+        this.quizQuestionRepository = quizQuestionRepository;
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
+    }
+
+
+    // Student sees ACTIVE quizzes under a class
+    @Override
+    public List<QuizSummaryResponse> getActiveQuizzesByClassId(Long classId) {
+
+        // Get only ACTIVE quizzes for that class
+        List<Quiz> quizzes = quizRepository.findByClassIdAndStatus(classId, QuizStatus.ACTIVE);
+
+        // Convert Quiz entities to QuizSummaryResponse DTOs
+        List<QuizSummaryResponse> responseList = new ArrayList<>();
+
+        for (Quiz quiz : quizzes) {
+            QuizSummaryResponse dto = new QuizSummaryResponse(
+                    quiz.getQuizId(),
+                    quiz.getQuizName(),
+                    quiz.getTimeLimitMinutes(),
+                    quiz.getQuestionCount()
+            );
+            responseList.add(dto);
+        }
+
+        return responseList;
+    }
+
+    /*
+      Student starts a quiz:
+      - quiz must exist
+      - quiz must be ACTIVE
+      - load selected questions (QuizQuestion table)
+      - load answers for each question
+      - IMPORTANT: return answers WITHOUT correct flags
+    */
+
+    @Override
+    public StartQuizResponse startQuiz(Long quizId) {
+
+        // Find quiz
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz not found: " + quizId));
+
+        // Only allow ACTIVE quizzes
+        if (quiz.getStatus() != QuizStatus.ACTIVE) {
+            throw new ResourceNotFoundException("Quiz is not ACTIVE: " + quizId);
+        }
+
+        // Get selected questions for this quiz (from mapping table)
+        // IMPORTANT: your repository method is findByQuizId(...)
+        List<QuizQuestion> quizQuestions = quizQuestionRepository.findByQuizId(quizId);
+
+        List<QuestionViewResponse> questionResponses = new ArrayList<>();
+
+        for (QuizQuestion qq : quizQuestions) {
+
+            // IMPORTANT: your QuizQuestion stores questionId (not Question object)
+            Long questionId = qq.getQuestionId();
+
+            // Load question entity
+            Question question = questionRepository.findById(questionId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Question not found: " + questionId));
+
+            // Load answers for that question
+            List<Answer> answers = answerRepository.findByQuestionQuestionId(questionId);
+
+            List<AnswerOptionResponse> answerResponses = new ArrayList<>();
+
+            for (Answer answer : answers) {
+                // IMPORTANT: do NOT send the "correct" boolean to student
+                AnswerOptionResponse answerDto =
+                        new AnswerOptionResponse(answer.getAnswerId(), answer.getAnswerText());
+                answerResponses.add(answerDto);
+            }
+
+            // Build question DTO
+            QuestionViewResponse questionDto = new QuestionViewResponse(
+                    question.getQuestionId(),
+                    question.getQuestionText(),
+                    answerResponses
+            );
+
+            questionResponses.add(questionDto);
+        }
+
+        //  Build final response DTO
+        StartQuizResponse response = new StartQuizResponse();
+        response.setQuizId(quiz.getQuizId());
+        response.setQuizName(quiz.getQuizName());
+        response.setTimeLimitMinutes(quiz.getTimeLimitMinutes());
+        response.setQuestions(questionResponses);
+
+        return response;
+    }
+}
