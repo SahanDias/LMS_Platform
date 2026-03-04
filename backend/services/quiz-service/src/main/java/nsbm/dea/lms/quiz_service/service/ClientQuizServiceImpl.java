@@ -4,6 +4,9 @@ import nsbm.dea.lms.quiz_service.dto.AnswerOptionResponse;
 import nsbm.dea.lms.quiz_service.dto.QuestionViewResponse;
 import nsbm.dea.lms.quiz_service.dto.QuizSummaryResponse;
 import nsbm.dea.lms.quiz_service.dto.StartQuizResponse;
+import nsbm.dea.lms.quiz_service.dto.SubmitQuizRequest;
+import nsbm.dea.lms.quiz_service.dto.SubmitQuizResponse;
+import nsbm.dea.lms.quiz_service.dto.SubmittedAnswer;
 import nsbm.dea.lms.quiz_service.entity.Answer;
 import nsbm.dea.lms.quiz_service.entity.Question;
 import nsbm.dea.lms.quiz_service.entity.Quiz;
@@ -23,7 +26,6 @@ import java.util.List;
   Implements ClientQuizService
   Uses repositories to read quiz data for students.
 */
-
 @Service
 public class ClientQuizServiceImpl implements ClientQuizService {
 
@@ -32,7 +34,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
 
-    // Constructor injection (recommended)
     public ClientQuizServiceImpl(QuizRepository quizRepository,
                                  QuizQuestionRepository quizQuestionRepository,
                                  QuestionRepository questionRepository,
@@ -43,15 +44,13 @@ public class ClientQuizServiceImpl implements ClientQuizService {
         this.answerRepository = answerRepository;
     }
 
+     // Student sees ACTIVE quizzes under a class
 
-    // Student sees ACTIVE quizzes under a class
     @Override
     public List<QuizSummaryResponse> getActiveQuizzesByClassId(Long classId) {
 
-        // Get only ACTIVE quizzes for that class
         List<Quiz> quizzes = quizRepository.findByClassIdAndStatus(classId, QuizStatus.ACTIVE);
 
-        // Convert Quiz entities to QuizSummaryResponse DTOs
         List<QuizSummaryResponse> responseList = new ArrayList<>();
 
         for (Quiz quiz : quizzes) {
@@ -75,47 +74,40 @@ public class ClientQuizServiceImpl implements ClientQuizService {
       - load answers for each question
       - IMPORTANT: return answers WITHOUT correct flags
     */
-
     @Override
     public StartQuizResponse startQuiz(Long quizId) {
 
-        // Find quiz
         Quiz quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quiz not found: " + quizId));
 
-        // Only allow ACTIVE quizzes
         if (quiz.getStatus() != QuizStatus.ACTIVE) {
             throw new ResourceNotFoundException("Quiz is not ACTIVE: " + quizId);
         }
 
-        // Get selected questions for this quiz (from mapping table)
-        // IMPORTANT: your repository method is findByQuizId(...)
+        // Your repository method is findByQuizId(...)
         List<QuizQuestion> quizQuestions = quizQuestionRepository.findByQuizId(quizId);
 
         List<QuestionViewResponse> questionResponses = new ArrayList<>();
 
         for (QuizQuestion qq : quizQuestions) {
 
-            // IMPORTANT: your QuizQuestion stores questionId (not Question object)
+            // Your QuizQuestion stores questionId
             Long questionId = qq.getQuestionId();
 
-            // Load question entity
             Question question = questionRepository.findById(questionId)
                     .orElseThrow(() -> new ResourceNotFoundException("Question not found: " + questionId));
 
-            // Load answers for that question
             List<Answer> answers = answerRepository.findByQuestionQuestionId(questionId);
 
             List<AnswerOptionResponse> answerResponses = new ArrayList<>();
 
             for (Answer answer : answers) {
-                // IMPORTANT: do NOT send the "correct" boolean to student
+                // DO NOT send correct flag to student
                 AnswerOptionResponse answerDto =
                         new AnswerOptionResponse(answer.getAnswerId(), answer.getAnswerText());
                 answerResponses.add(answerDto);
             }
 
-            // Build question DTO
             QuestionViewResponse questionDto = new QuestionViewResponse(
                     question.getQuestionId(),
                     question.getQuestionText(),
@@ -125,12 +117,66 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             questionResponses.add(questionDto);
         }
 
-        //  Build final response DTO
         StartQuizResponse response = new StartQuizResponse();
         response.setQuizId(quiz.getQuizId());
         response.setQuizName(quiz.getQuizName());
         response.setTimeLimitMinutes(quiz.getTimeLimitMinutes());
         response.setQuestions(questionResponses);
+
+        return response;
+    }
+
+    /*
+      Student submits quiz attempt:
+      - quiz must exist and ACTIVE
+      - calculate correct answers
+      - calculate score percentage
+      - passed if score >= passingScore
+    */
+    @Override
+    public SubmitQuizResponse submitQuiz(Long quizId, SubmitQuizRequest request) {
+
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz not found: " + quizId));
+
+        if (quiz.getStatus() != QuizStatus.ACTIVE) {
+            throw new ResourceNotFoundException("Quiz is not ACTIVE: " + quizId);
+        }
+
+        // Total questions should be based on selected questions for quiz
+        List<QuizQuestion> selectedQuestions = quizQuestionRepository.findByQuizId(quizId);
+        int totalQuestions = selectedQuestions.size();
+
+        int correctCount = 0;
+
+        // If student sends answers
+        if (request != null && request.getAnswers() != null) {
+
+            for (SubmittedAnswer submitted : request.getAnswers()) {
+
+                // Load selected answer from DB
+                Answer answer = answerRepository.findById(submitted.getAnswerId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Answer not found: " + submitted.getAnswerId()));
+
+                // Count correct answers
+                if (answer.isCorrect()) {
+                    correctCount++;
+                }
+            }
+        }
+
+        int scorePercentage = 0;
+        if (totalQuestions > 0) {
+            scorePercentage = (correctCount * 100) / totalQuestions;
+        }
+
+        boolean passed = scorePercentage >= quiz.getPassingScore();
+
+        SubmitQuizResponse response = new SubmitQuizResponse();
+        response.setTotalQuestions(totalQuestions);
+        response.setCorrectAnswers(correctCount);
+        response.setScorePercentage(scorePercentage);
+        response.setPassed(passed);
 
         return response;
     }
