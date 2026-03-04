@@ -1,28 +1,32 @@
 package nsbm.dea.lms.quiz_service.service;
 
+import nsbm.dea.lms.quiz_service.dto.CreateQuizRequest;
 import nsbm.dea.lms.quiz_service.entity.Quiz;
+import nsbm.dea.lms.quiz_service.entity.QuizStatus;
 
 import java.util.List;
 
 /*
-    Defines business logic for Quiz operations
+ Admin Quiz operations (CRUD + Status)
 */
 
 public interface QuizService {
 
-     // Save new Quiz
+    //  CREATE QUIZ
+    Quiz createQuiz(CreateQuizRequest request);
 
-    Quiz saveQuiz(Quiz quiz);
+    // GET QUIZZES
+    List<Quiz> getAllQuizzes(Long courseId, Long classId);
 
-     // Get all quizzes
-
-    List<Quiz> getAllQuizzes();
-
-     // Get quiz by ID
-
+    // GET QUIZ BY ID
     Quiz getQuizById(Long quizId);
 
-     // Delete quiz
+    // UPDATE QUIZ
+    Quiz updateQuiz(Long quizId, CreateQuizRequest request);
 
+    // UPDATE STATUS
+    Quiz updateStatus(Long quizId, QuizStatus status);
+
+    // DELETE QUIZ
     void deleteQuiz(Long quizId);
 }
