@@ -9,12 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /*
- ---------------------------------------------------------
-  Class Name    : QuizController
-  Type          : REST Controller Class
-  Description   : Admin Quiz Management APIs
+  Admin Quiz Management APIs
   Base URL      : /api/admin/quizzes
- ---------------------------------------------------------
 */
 
 @RestController
@@ -22,29 +18,20 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class QuizController {
 
-    /* ================================
-       ========== DEPENDENCY ==========
-       ================================ */
-
+    // DEPENDENCY
     private final QuizService quizService;
 
     public QuizController(QuizService quizService) {
         this.quizService = quizService;
     }
 
-    /* ================================
-       ========== CREATE QUIZ =========
-       ================================ */
-
+    // CREATE QUIZ
     @PostMapping
     public Quiz createQuiz(@RequestBody CreateQuizRequest request) {
         return quizService.createQuiz(request);
     }
 
-    /* ================================
-       ========== GET QUIZZES =========
-       ================================ */
-
+    // GET QUIZZES
     @GetMapping
     public List<Quiz> getAllQuizzes(
             @RequestParam(required = false) Long courseId,
@@ -53,39 +40,27 @@ public class QuizController {
         return quizService.getAllQuizzes(courseId, classId);
     }
 
-    /* ================================
-       ========== GET QUIZ BY ID ======
-       ================================ */
-
+    // GET QUIZ BY ID
     @GetMapping("/{quizId}")
     public Quiz getQuizById(@PathVariable Long quizId) {
         return quizService.getQuizById(quizId);
     }
 
-    /* ================================
-       ========== UPDATE QUIZ =========
-       ================================ */
-
+    // UPDATE QUIZ
     @PutMapping("/{quizId}")
     public Quiz updateQuiz(@PathVariable Long quizId,
                            @RequestBody CreateQuizRequest request) {
         return quizService.updateQuiz(quizId, request);
     }
 
-    /* ================================
-       ========== UPDATE STATUS =======
-       ================================ */
-
+    // UPDATE STATUS
     @PatchMapping("/{quizId}/status")
     public Quiz updateQuizStatus(@PathVariable Long quizId,
                                  @RequestParam QuizStatus status) {
         return quizService.updateStatus(quizId, status);
     }
 
-    /* ================================
-       ========== DELETE QUIZ =========
-       ================================ */
-
+    // DELETE QUIZ
     @DeleteMapping("/{quizId}")
     public void deleteQuiz(@PathVariable Long quizId) {
         quizService.deleteQuiz(quizId);
