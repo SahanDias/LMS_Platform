@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: LMS Payment Service
+  datasource:
+    url: jdbc:mysql://localhost:3306/payment-service?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+stripe:
+  secret:
+    key: sk_test_51Ryrc6COpaj22Bl7ABhby74P7KVI6GGxgEVIquGmYbgSS4uAjCd0C0vdIvEvsgaycBzPexrXcJv4lTsnvpUKfK8x0057Zq2i9u
+  public:
+    key: pk_test_51Ryrc6COpaj22Bl7Uoutadw4ok0QCFrk9vJsL0cTS7ZpOSVFWLKrVxvTrui2UYmr7UlCqD3pvjX7cC9SRVZFjXHE00mUr0RtX0
+  webhook:
+    secret: whsec_10b29dba1ad8015404d6b08950d89333464dcbdb288b9448a7951441bdc66c06  # Replace with your actual webhook endpoint secret

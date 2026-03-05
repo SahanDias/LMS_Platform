@@ -1,9 +1,36 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import CourseCard from "@/components/CourseCard";
-import { courses } from "@/lib/data";
+import { type Course } from "@/lib/data";
 import { BookOpen } from "lucide-react";
+import { courseApi } from "@/services/courseApi";
+import { Button } from "@/components/ui/button";
 
 const MyCourses = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [isLoadingCourses, setIsLoadingCourses] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const fetchCourses = async () => {
+    setIsLoadingCourses(true);
+    setLoadError(null);
+    try {
+      const data = await courseApi.getAllCourses();
+      setCourses(data);
+    } catch (error) {
+      setLoadError(
+        error instanceof Error ? error.message : "Unable to load courses"
+      );
+      setCourses([]);
+    } finally {
+      setIsLoadingCourses(false);
+    }
+  };
+
+  useEffect(() => {
+    void fetchCourses();
+  }, []);
+
   const enrolledCourses = courses.filter((course) => course.enrolled);
   const inProgressCourses = enrolledCourses.filter(
     (course) => course.progress > 0 && course.progress < 100
@@ -27,7 +54,17 @@ const MyCourses = () => {
           </p>
         </div>
 
-        {enrolledCourses.length === 0 ? (
+        {isLoadingCourses ? (
+          <div className="flex items-center justify-center py-16 text-center">
+            <p className="text-muted-foreground">Loading courses...</p>
+          </div>
+        ) : loadError ? (
+          <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+            <p className="font-medium text-foreground">Failed to load courses</p>
+            <p className="text-muted-foreground">{loadError}</p>
+            <Button onClick={() => void fetchCourses()}>Retry</Button>
+          </div>
+        ) : enrolledCourses.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <BookOpen className="mb-4 h-16 w-16 text-muted-foreground" />
             <p className="text-lg font-medium text-foreground">

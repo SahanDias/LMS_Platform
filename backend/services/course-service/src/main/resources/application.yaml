@@ -3,9 +3,9 @@ spring:
     name: LMS Course Service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/lms_course_service
+    url: jdbc:mysql://localhost:3306/lms_course_service?useSSL=false&serverTimezone=UTC
     username: root
-    password: 12345
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

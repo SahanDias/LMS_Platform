@@ -7,9 +7,20 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 8082,
     hmr: {
       overlay: false,
+    },
+    proxy: {
+      "/api": {
+        target: "http://localhost:7878",
+        changeOrigin: true,
+      },
+      "/payment-api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/payment-api/, ""),
+      },
     },
   },
   plugins: [react()],
