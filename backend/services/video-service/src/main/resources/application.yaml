@@ -5,7 +5,7 @@ spring:
   application:
     name: video-service
   datasource:
-    url: jdbc:mysql://video-service-db.czussyky8e0l.eu-north-1.rds.amazonaws.com:3306/video-service-db?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://video-service-db.czussyky8e0l.eu-north-1.rds.amazonaws.com:3306/video_service_db?allowPublicKeyRetrieval=true&useSSL=false
     username: video_user
     password: video123
     driver-class-name: com.mysql.cj.jdbc.Driver
