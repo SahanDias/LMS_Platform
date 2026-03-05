@@ -1,10 +1,14 @@
+import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
-import { courses, certificates } from "@/lib/data";
+import { certificates, type Course } from "@/lib/data";
+import { courseApi } from "@/services/courseApi";
+import { paymentApi } from "@/services/paymentApi";
+import { useToast } from "@/hooks/use-toast";
 import {
   ArrowLeft,
   Clock,
@@ -18,15 +22,80 @@ import {
 
 const CourseDetail = () => {
   const { id } = useParams();
-  const course = courses.find((c) => c.id === id);
+  const [course, setCourse] = useState<Course | null>(null);
+  const [isLoadingCourse, setIsLoadingCourse] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [isCreatingPayment, setIsCreatingPayment] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      if (!id) {
+        setCourse(null);
+        setIsLoadingCourse(false);
+        return;
+      }
+
+      setIsLoadingCourse(true);
+      setLoadError(null);
+      try {
+        const data = await courseApi.getCourseById(id);
+        setCourse(data);
+      } catch (error) {
+        setLoadError(
+          error instanceof Error ? error.message : "Unable to load course"
+        );
+        setCourse(null);
+      } finally {
+        setIsLoadingCourse(false);
+      }
+    };
+
+    void fetchCourse();
+  }, [id]);
+
   const certificate = certificates.find((c) => c.courseId === id);
+
+  const lessons = useMemo(() => {
+    if (!course) {
+      return [];
+    }
+    return Array.from({ length: course.lessons }, (_, i) => ({
+      id: i + 1,
+      title: `Lesson ${i + 1}: ${
+        i === 0
+          ? "Introduction"
+          : i === course.lessons - 1
+          ? "Final Project"
+          : `Module ${Math.ceil((i + 1) / 5)} - Part ${((i + 1) % 5) || 5}`
+      }`,
+      duration: `${Math.floor(Math.random() * 20) + 5} min`,
+      completed:
+        course.enrolled && (i + 1) / course.lessons <= course.progress / 100,
+      locked: !course.enrolled,
+    }));
+  }, [course]);
+
+  if (isLoadingCourse) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto flex flex-col items-center justify-center px-4 py-16">
+          <p className="text-muted-foreground">Loading course...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!course) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto flex flex-col items-center justify-center px-4 py-16">
-          <h1 className="text-2xl font-bold text-foreground">Course not found</h1>
+          <h1 className="text-2xl font-bold text-foreground">
+            {loadError ? "Failed to load course" : "Course not found"}
+          </h1>
+          {loadError && <p className="mt-2 text-muted-foreground">{loadError}</p>}
           <Link to="/" className="mt-4">
             <Button>Back to Courses</Button>
           </Link>
@@ -35,20 +104,43 @@ const CourseDetail = () => {
     );
   }
 
-  // Generate sample lessons
-  const lessons = Array.from({ length: course.lessons }, (_, i) => ({
-    id: i + 1,
-    title: `Lesson ${i + 1}: ${
-      i === 0
-        ? "Introduction"
-        : i === course.lessons - 1
-        ? "Final Project"
-        : `Module ${Math.ceil((i + 1) / 5)} - Part ${((i + 1) % 5) || 5}`
-    }`,
-    duration: `${Math.floor(Math.random() * 20) + 5} min`,
-    completed: course.enrolled && (i + 1) / course.lessons <= course.progress / 100,
-    locked: !course.enrolled,
-  }));
+  const isFree = course.price <= 0 || course.category === "Free";
+
+  const handleEnroll = async () => {
+    if (!course || isCreatingPayment) {
+      return;
+    }
+
+    if (isFree) {
+      toast({
+        title: "Free course",
+        description: "No payment required for this course.",
+      });
+      return;
+    }
+
+    setIsCreatingPayment(true);
+    try {
+      const checkoutUrl = await paymentApi.createPaymentSession({
+        studentName: "LMS Student",
+        email: "student@example.com",
+        course: course.title,
+        amount: course.price,
+      });
+      window.location.assign(checkoutUrl);
+    } catch (error) {
+      toast({
+        title: "Payment failed",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Unable to create payment session",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCreatingPayment(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,6 +214,11 @@ const CourseDetail = () => {
                   className="h-48 w-full object-cover"
                 />
                 <CardContent className="p-6">
+                  {!course.enrolled && (
+                    <p className="mb-3 text-center text-lg font-semibold text-foreground">
+                      {isFree ? "Free" : `$${course.price.toFixed(2)}`}
+                    </p>
+                  )}
                   {course.enrolled ? (
                     course.progress === 100 && certificate ? (
                       <Link to="/certificates">
@@ -137,7 +234,17 @@ const CourseDetail = () => {
                       </Button>
                     )
                   ) : (
-                    <Button className="w-full">Enroll Now - Free</Button>
+                    <Button
+                      className="w-full"
+                      onClick={() => void handleEnroll()}
+                      disabled={isCreatingPayment}
+                    >
+                      {isCreatingPayment
+                        ? "Redirecting..."
+                        : isFree
+                        ? "Enroll Now - Free"
+                        : `Enroll Now - $${course.price.toFixed(2)}`}
+                    </Button>
                   )}
                 </CardContent>
               </Card>
