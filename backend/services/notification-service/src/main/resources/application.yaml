@@ -1,3 +1,28 @@
 spring:
   application:
-    name: LMS Course Service
+    name: notification-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/notification_service_db
+    username: notification_user
+    password: notification123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+external:
+  notifications:
+    course-url: https://mp97a4c95f7ca16d4ae7.free.beeceptor.com/notificationdata/course
+    payment-url: https://mpd7ffa088c8dd86cc97.free.beeceptor.com/notification/payment
+
+server:
+  port: 8080
