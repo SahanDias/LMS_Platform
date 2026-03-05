@@ -6,8 +6,11 @@ import nsbm.dea.lms.payment_service.service.StripeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 public class PaymentController {
@@ -33,5 +36,41 @@ public class PaymentController {
     @GetMapping("/payments")
     public List<Payment> getAllPayments() {
         return paymentRepository.findAll();
+    }
+
+    @GetMapping("/payments/stats")
+    public Map<String, Object> getPaymentStats() {
+        List<Payment> all = paymentRepository.findAll();
+        Map<String, Object> stats = new HashMap<>();
+        
+        double totalRevenue = all.stream()
+                .filter(p -> "SUCCESS".equals(p.getStatus()))
+                .mapToDouble(Payment::getAmount)
+                .sum();
+        
+        long totalTransactions = all.size();
+        long successfulTransactions = all.stream()
+                .filter(p -> "SUCCESS".equals(p.getStatus()))
+                .count();
+        
+        stats.put("totalRevenue", totalRevenue);
+        stats.put("totalTransactions", totalTransactions);
+        stats.put("successfulTransactions", successfulTransactions);
+        stats.put("failedTransactions", totalTransactions - successfulTransactions);
+        
+        return stats;
+    }
+
+    @GetMapping("/payments/search")
+    public List<Payment> searchPayments(
+            @RequestParam(name = "studentName", required = false) String studentName,
+            @RequestParam(name = "status", required = false) String status
+    ) {
+        List<Payment> all = paymentRepository.findAll();
+        
+        return all.stream()
+                .filter(p -> studentName == null || (p.getStudentName() != null && p.getStudentName().toLowerCase().contains(studentName.toLowerCase())))
+                .filter(p -> status == null || status.equals(p.getStatus()))
+                .toList();
     }
 }

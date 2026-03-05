@@ -32,7 +32,7 @@ const PaymentsPage = () => {
     setSelected(null);
   };
 
-  const totalRevenue = payments.filter(p => p.status === "succeeded").reduce((s, p) => s + p.amount, 0);
+  const totalRevenue = payments.filter(p => p.status === "SUCCESS").reduce((s, p) => s + p.amount, 0);
   const totalRefunded = payments.filter(p => p.status === "refunded").reduce((s, p) => s + p.amount, 0);
 
   return (
@@ -90,7 +90,7 @@ const PaymentsPage = () => {
                 <TableCell className="text-muted-foreground">{p.courseName}</TableCell>
                 <TableCell className="font-medium">${p.amount}</TableCell>
                 <TableCell className="text-sm">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 uppercase">
                     <CreditCard className="w-3.5 h-3.5 text-muted-foreground" />
                     {p.method}
                   </div>
@@ -124,7 +124,7 @@ const PaymentsPage = () => {
                 <div><p className="text-muted-foreground">Date</p><p className="font-medium">{new Date(selected.createdAt).toLocaleString()}</p></div>
                 <div><p className="text-muted-foreground">Status</p><StatusBadge status={selected.status} /></div>
               </div>
-              {selected.status === "succeeded" && (
+              {selected.status === "SUCCESS" && (
                 <Button variant="destructive" className="w-full" onClick={() => handleRefund(selected.id)}>
                   <RotateCcw className="w-4 h-4 mr-2" />Issue Refund
                 </Button>

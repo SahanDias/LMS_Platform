@@ -46,7 +46,7 @@ export interface Payment {
   courseName: string;
   amount: number;
   currency: string;
-  status: "succeeded" | "pending" | "failed" | "refunded";
+  status: "SUCCESS" | "pending" | "FAILED" | "refunded";
   stripePaymentId: string;
   method: string;
   createdAt: string;

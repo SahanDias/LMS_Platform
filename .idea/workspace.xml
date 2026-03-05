@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,8 +76,10 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.Application.executor": "Run",
+    "Spring Boot.LmsCourseServiceApplication.executor": "Run",
+    "Spring Boot.LmsPaymentServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "class-schedule-service-dev-rasan",
+    "git-widget-placeholder": "payment-service-dev2-ashen",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rasa/Downloads/service_class-schedule",
@@ -93,6 +88,11 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -102,7 +102,29 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="LmsCourseServiceApplication" value="STOPPED" />
+              <entry key="LmsPaymentServiceApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LmsPaymentServiceApplication">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="service-class-schedule" />
@@ -111,6 +133,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LmsCourseServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="course-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.course.LmsCourseServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LmsPaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="payment-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.payment_service.LmsPaymentServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nsbm.dea.lms.payment_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.LmsPaymentServiceApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
