@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +119,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.LmsPaymentServiceApplication">
+  <component name="RunManager" selected="Spring Boot.LmsCourseServiceApplication">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="service-class-schedule" />
