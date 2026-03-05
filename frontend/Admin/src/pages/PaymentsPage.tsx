@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Search, Eye, RotateCcw, CreditCard } from "lucide-react";
+import { Search, Eye, Trash2, CreditCard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const PaymentsPage = () => {
@@ -25,11 +25,20 @@ const PaymentsPage = () => {
     p.stripePaymentId.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleRefund = async (id: string) => {
-    await paymentsApi.refund(id);
-    toast({ title: "Payment refunded" });
-    load();
-    setSelected(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await paymentsApi.delete(id);
+      toast({ title: "Payment deleted" });
+      load();
+      setSelected(null);
+    } catch (error) {
+      toast({
+        title: "Failed to delete payment",
+        description:
+          error instanceof Error ? error.message : "Unknown error occurred",
+        variant: "destructive",
+      });
+    }
   };
 
   const totalRevenue = payments.filter(p => p.status === "SUCCESS").reduce((s, p) => s + p.amount, 0);
@@ -124,11 +133,9 @@ const PaymentsPage = () => {
                 <div><p className="text-muted-foreground">Date</p><p className="font-medium">{new Date(selected.createdAt).toLocaleString()}</p></div>
                 <div><p className="text-muted-foreground">Status</p><StatusBadge status={selected.status} /></div>
               </div>
-              {selected.status === "SUCCESS" && (
-                <Button variant="destructive" className="w-full" onClick={() => handleRefund(selected.id)}>
-                  <RotateCcw className="w-4 h-4 mr-2" />Issue Refund
-                </Button>
-              )}
+              <Button variant="destructive" className="w-full" onClick={() => handleDelete(selected.id)}>
+                <Trash2 className="w-4 h-4 mr-2" />Delete Payment
+              </Button>
             </div>
           )}
         </DialogContent>

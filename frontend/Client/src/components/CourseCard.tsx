@@ -17,6 +17,8 @@ const levelColors = {
 };
 
 const CourseCard = ({ course }: CourseCardProps) => {
+  const isFree = course.price <= 0 || course.category === "Free";
+
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className="relative overflow-hidden">
@@ -59,6 +61,10 @@ const CourseCard = ({ course }: CourseCardProps) => {
             <BookOpen className="h-4 w-4" />
             <span>{course.lessons} lessons</span>
           </div>
+        </div>
+
+        <div className="mt-3 text-sm font-semibold text-foreground">
+          {isFree ? "Free" : `$${course.price.toFixed(2)}`}
         </div>
 
         {course.enrolled && (

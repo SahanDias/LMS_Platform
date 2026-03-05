@@ -1,4 +1,4 @@
-package nsbm.dea.lms.payment_service.config;
+package nsbm.dea.lms.course.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class CorsConfig {
                                 "http://127.0.0.1:8081",
                                 "http://127.0.0.1:8082"
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .exposedHeaders("*")
                         .allowCredentials(true);

@@ -3,42 +3,65 @@ import { Course, Certification, Quiz, Payment } from "@/types";
 const API_BASE = "/api/v1/course";
 const PAYMENT_API_BASE = "http://localhost:8080";
 
+type BackendCourse = Omit<Course, "isFree"> & {
+  isFree?: boolean;
+  free?: boolean;
+};
+
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+const normalizeCourse = (course: BackendCourse): Course => ({
+  ...course,
+  price: Number(course.price ?? 0),
+  isFree: Boolean(course.isFree ?? course.free ?? false),
+});
+
+const toBackendCoursePayload = (
+  data: Omit<Course, "id" | "createdBy" | "createdAt" | "updatedAt"> | Partial<Course>
+) => {
+  const payload = { ...data } as Record<string, unknown>;
+  if ("isFree" in payload) {
+    payload.free = Boolean(payload.isFree);
+    delete payload.isFree;
+  }
+  return payload;
+};
 
 // --- COURSES 
 export const coursesApi = {
   getAll: async (): Promise<Course[]> => {
-    try {
-      const res = await fetch(API_BASE);
-      if (!res.ok) throw new Error("Failed to fetch courses");
-      return res.json();
-    } catch (error) {
-      console.warn("Course service unavailable, returning empty array");
-      return [];
+    const res = await fetch(API_BASE);
+    if (!res.ok) {
+      throw new Error("Failed to fetch courses");
     }
+    const payload = (await res.json()) as BackendCourse[];
+    return Array.isArray(payload) ? payload.map(normalizeCourse) : [];
   },
   getById: async (id: number): Promise<Course> => {
     const res = await fetch(`${API_BASE}/getCourse/${id}`);
     if (!res.ok) throw new Error("Course not found");
-    return res.json();
+    const payload = (await res.json()) as BackendCourse;
+    return normalizeCourse(payload);
   },
   create: async (data: Omit<Course, "id" | "createdBy" | "createdAt" | "updatedAt">): Promise<Course> => {
     const res = await fetch(`${API_BASE}/createCourse`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(toBackendCoursePayload(data)),
     });
     if (!res.ok) throw new Error("Failed to create course");
-    return res.json();
+    const payload = (await res.json()) as BackendCourse;
+    return normalizeCourse(payload);
   },
   update: async (id: number, data: Partial<Course>): Promise<Course> => {
     const res = await fetch(`${API_BASE}/updateCourse/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(toBackendCoursePayload(data)),
     });
     if (!res.ok) throw new Error("Failed to update course");
-    return res.json();
+    const payload = (await res.json()) as BackendCourse;
+    return normalizeCourse(payload);
   },
   delete: async (id: number): Promise<void> => {
     const res = await fetch(`${API_BASE}/deleteCourse/${id}`, { method: "DELETE" });
@@ -141,8 +164,14 @@ export const paymentsApi = {
     const all = await paymentsApi.getAll();
     return all.find((p) => p.id === id);
   },
-  refund: async (id: string): Promise<Payment> => {
-    throw new Error("Refund not implemented yet");
+  delete: async (id: string): Promise<void> => {
+    const res = await fetch(`${PAYMENT_API_BASE}/payments/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || "Failed to delete payment");
+    }
   },
 };
 

@@ -7,22 +7,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class StripeService {
 
-    public String createCheckoutSession(String studentName, String email, String course) throws Exception {
+    public String createCheckoutSession(String studentName, String email, String course, Double amount) throws Exception {
+        if (amount == null || amount <= 0) {
+            throw new IllegalArgumentException("Invalid amount. A positive course fee is required.");
+        }
+        long unitAmountInCents = Math.round(amount * 100);
+
+        String courseName = (course != null && !course.isBlank()) ? course : "LMS Course";
 
         SessionCreateParams.Builder builder = SessionCreateParams.builder()
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("http://localhost:3000/success")
-                        .setCancelUrl("http://localhost:3000/cancel")
+                        .setSuccessUrl("http://localhost:8082/success")
+                        .setCancelUrl("http://localhost:8082/failed")
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
                                         .setQuantity(1L)
                                         .setPriceData(
                                                 SessionCreateParams.LineItem.PriceData.builder()
                                                         .setCurrency("usd")
-                                                        .setUnitAmount(2000L)
+                                                .setUnitAmount(unitAmountInCents)
                                                         .setProductData(
                                                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                                        .setName("Test Product")
+                                                        .setName(courseName)
                                                                         .build()
                                                         )
                                                         .build()
@@ -31,8 +37,7 @@ public class StripeService {
                         );
 
         // add customer info and metadata
-        if (email != null) {
-            builder.setCustomerEmail(email);
+        if (email != null && !email.isBlank()) {
             builder.putMetadata("studentEmail", email);
         }
         if (studentName != null) {
@@ -40,6 +45,7 @@ public class StripeService {
             builder.putMetadata("studentName", studentName);
         }
         if (course != null) builder.putMetadata("course", course);
+        if (amount != null) builder.putMetadata("amount", String.valueOf(amount));
 
         SessionCreateParams params = builder.build();
 
