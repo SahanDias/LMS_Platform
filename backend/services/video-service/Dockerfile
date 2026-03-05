@@ -1,5 +1,5 @@
-# Use a base image with Java 17 (matching your project)
-FROM eclipse-temurin:17-jdk-alpine
+# Use a base image with Java 21 (matching your project)
+FROM eclipse-temurin:21-jdk-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,8 +8,11 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
+# Ensure mvnw is executable
+RUN chmod +x mvnw
+
 # Download dependencies (this step is cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw dependency:resolve
 
 # Copy the source code
 COPY src ./src
@@ -21,4 +24,4 @@ RUN ./mvnw package -DskipTests
 EXPOSE 8083
 
 # Command to run the application
-CMD ["java", "-jar", "target/video-service-0.0.1-SNAPSHOT.jar"]
+CMD ["sh", "-c", "java -jar target/*.jar"]
