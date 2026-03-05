@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class StripeService {
 
-    public String createCheckoutSession() throws Exception {
+    public String createCheckoutSession(String studentName, String email, String course) throws Exception {
 
-        SessionCreateParams params =
-                SessionCreateParams.builder()
+        SessionCreateParams.Builder builder = SessionCreateParams.builder()
                         .setMode(SessionCreateParams.Mode.PAYMENT)
                         .setSuccessUrl("http://localhost:3000/success")
                         .setCancelUrl("http://localhost:3000/cancel")
@@ -29,8 +28,20 @@ public class StripeService {
                                                         .build()
                                         )
                                         .build()
-                        )
-                        .build();
+                        );
+
+        // add customer info and metadata
+        if (email != null) {
+            builder.setCustomerEmail(email);
+            builder.putMetadata("studentEmail", email);
+        }
+        if (studentName != null) {
+            // Stripe session doesn't have a setCustomerName method; keep in metadata
+            builder.putMetadata("studentName", studentName);
+        }
+        if (course != null) builder.putMetadata("course", course);
+
+        SessionCreateParams params = builder.build();
 
         Session session = Session.create(params);
 
