@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/course")
+@RequestMapping("/api/v1/course")
 public class CourseController {
     @Autowired
     private CourseService courseService;
 
     // Get all courses
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
         return ResponseEntity.ok(courseService.getCourses());
     }
 
     // Get course by ID
-    @GetMapping("/{id}")
+    @GetMapping("getCourse/{id}")
     public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
         return courseService.getCourseById(id)
                 .map(ResponseEntity::ok)
@@ -29,20 +29,20 @@ public class CourseController {
     }
 
     // Create a new course
-    @PostMapping
+    @PostMapping("createCourse")
     public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO courseDTO) {
         CourseDTO created = courseService.createCourse(courseDTO);
         return ResponseEntity.status(201).body(created);
     }
 
     // Update course by ID
-    @PutMapping("/{id}")
+    @PutMapping("updateCourse/{id}")
     public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id, @RequestBody CourseDTO courseDTO) {
         return ResponseEntity.ok(courseService.updateCourse(id, courseDTO));
     }
 
     // Delete course by ID
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteCourse/{id}")
     public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.ok("Course with id " + id + " deleted successfully!");

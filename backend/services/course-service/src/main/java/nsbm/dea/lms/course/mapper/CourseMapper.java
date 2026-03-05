@@ -9,6 +9,7 @@ public class CourseMapper {
         CourseDTO dto = new CourseDTO();
 
         dto.setId(course.getId());
+        dto.setCourseCode((course.getCourseCode()));
         dto.setTitle(course.getTitle());
         dto.setDescription(course.getDescription());
         dto.setThumbnailImgUrl(course.getThumbnailImgUrl());
@@ -19,6 +20,7 @@ public class CourseMapper {
         dto.setCreatedBy(course.getCreatedBy());
         dto.setCreatedAt(course.getCreatedAt());
         dto.setUpdatedAt(course.getUpdatedAt());
+        dto.setFree(course.isFree());
 
         return dto;
     }
@@ -27,6 +29,7 @@ public class CourseMapper {
         Course course = new Course();
 
         course.setId(dto.getId());
+        course.setCourseCode(dto.getCourseCode());
         course.setTitle(dto.getTitle());
         course.setDescription(dto.getDescription());
         course.setThumbnailImgUrl(dto.getThumbnailImgUrl());
@@ -35,8 +38,8 @@ public class CourseMapper {
         course.setCertificationEnabled(dto.isCertificationEnabled());
         course.setStatus(dto.getStatus());
         course.setCreatedBy(dto.getCreatedBy());
-        course.setCreatedAt(dto.getCreatedAt());
-        course.setUpdatedAt(dto.getUpdatedAt());
+        course.setFree(dto.isFree());
+        // createdAt and updatedAt are handled by @PrePersist / @PreUpdate
 
         return course;
     }

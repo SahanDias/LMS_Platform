@@ -20,10 +20,25 @@ public class Course {
     private boolean certificationEnabled;
     private String status;
     private Long createdBy;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
-    public Course(Long id, String courseCode, String title, String description, String thumbnailImgUrl, BigDecimal price, int passingPercentage, boolean certificationEnabled, String status, Long createdBy, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+    private boolean isFree;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+    public Course(Long id, String courseCode, String title, String description, String thumbnailImgUrl, BigDecimal price, int passingPercentage, boolean certificationEnabled, String status, Long createdBy, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isFree) {
         this.id = id;
         this.courseCode = courseCode;
         this.title = title;
@@ -36,6 +51,7 @@ public class Course {
         this.createdBy = createdBy;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isFree = isFree;
     }
 
     public Course() {
@@ -137,10 +153,19 @@ public class Course {
         this.updatedAt = updatedAt;
     }
 
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        this.isFree = free;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "id=" + id +
+                ", courseCode='" + courseCode + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", thumbnailImgUrl='" + thumbnailImgUrl + '\'' +
@@ -151,6 +176,7 @@ public class Course {
                 ", createdBy=" + createdBy +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", isFree=" + isFree +
                 '}';
     }
 }

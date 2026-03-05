@@ -1,31 +1,43 @@
 import { Course, Certification, Quiz, Payment } from "@/types";
 
+const API_BASE = "/api/v1/course";
+
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// --- COURSES ---
-let courses: Course[] = [
-  { id: "c1", title: "React Masterclass", description: "Complete React guide from basics to advanced patterns.", instructor: "Sarah Chen", category: "Frontend", price: 79.99, duration: "24h", status: "published", enrolledCount: 342, createdAt: "2025-11-01" },
-  { id: "c2", title: "Python for Data Science", description: "Learn data analysis, visualization, and ML with Python.", instructor: "James Miller", category: "Data Science", price: 89.99, duration: "32h", status: "published", enrolledCount: 518, createdAt: "2025-10-15" },
-  { id: "c3", title: "UI/UX Design Fundamentals", description: "Master design thinking and modern UI patterns.", instructor: "Emily Park", category: "Design", price: 59.99, duration: "18h", status: "draft", enrolledCount: 0, createdAt: "2026-01-20" },
-  { id: "c4", title: "DevOps & Cloud Infrastructure", description: "CI/CD, Docker, Kubernetes, and AWS essentials.", instructor: "Alex Rodriguez", category: "DevOps", price: 99.99, duration: "40h", status: "published", enrolledCount: 187, createdAt: "2025-09-05" },
-  { id: "c5", title: "Node.js Backend Development", description: "Build scalable APIs with Node.js and Express.", instructor: "Sarah Chen", category: "Backend", price: 69.99, duration: "28h", status: "archived", enrolledCount: 421, createdAt: "2025-06-12" },
-];
-
+// --- COURSES 
 export const coursesApi = {
-  getAll: async (): Promise<Course[]> => { await delay(300); return [...courses]; },
-  getById: async (id: string): Promise<Course | undefined> => { await delay(200); return courses.find((c) => c.id === id); },
-  create: async (data: Omit<Course, "id" | "enrolledCount" | "createdAt">): Promise<Course> => {
-    await delay(400);
-    const c: Course = { ...data, id: `c${Date.now()}`, enrolledCount: 0, createdAt: new Date().toISOString().split("T")[0] };
-    courses.push(c);
-    return c;
+  getAll: async (): Promise<Course[]> => {
+    const res = await fetch(API_BASE);
+    if (!res.ok) throw new Error("Failed to fetch courses");
+    return res.json();
   },
-  update: async (id: string, data: Partial<Course>): Promise<Course> => {
-    await delay(400);
-    courses = courses.map((c) => (c.id === id ? { ...c, ...data } : c));
-    return courses.find((c) => c.id === id)!;
+  getById: async (id: number): Promise<Course> => {
+    const res = await fetch(`${API_BASE}/getCourse/${id}`);
+    if (!res.ok) throw new Error("Course not found");
+    return res.json();
   },
-  delete: async (id: string): Promise<void> => { await delay(300); courses = courses.filter((c) => c.id !== id); },
+  create: async (data: Omit<Course, "id" | "createdBy" | "createdAt" | "updatedAt">): Promise<Course> => {
+    const res = await fetch(`${API_BASE}/createCourse`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("Failed to create course");
+    return res.json();
+  },
+  update: async (id: number, data: Partial<Course>): Promise<Course> => {
+    const res = await fetch(`${API_BASE}/updateCourse/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("Failed to update course");
+    return res.json();
+  },
+  delete: async (id: number): Promise<void> => {
+    const res = await fetch(`${API_BASE}/deleteCourse/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Failed to delete course");
+  },
 };
 
 // --- CERTIFICATIONS ---
@@ -100,8 +112,9 @@ export const paymentsApi = {
 export const dashboardApi = {
   getStats: async () => {
     await delay(300);
+    const allCourses = await coursesApi.getAll();
     return {
-      totalCourses: courses.length,
+      totalCourses: allCourses.length,
       totalStudents: 1468,
       totalRevenue: 48750.00,
       activeQuizzes: quizzes.filter((q) => q.status === "active").length,

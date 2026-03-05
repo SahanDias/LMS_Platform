@@ -43,6 +43,7 @@ public class CourseService {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
 
+        course.setCourseCode(courseDetails.getCourseCode());
         course.setTitle(courseDetails.getTitle());
         course.setDescription(courseDetails.getDescription());
         course.setThumbnailImgUrl(courseDetails.getThumbnailImgUrl());
@@ -51,7 +52,8 @@ public class CourseService {
         course.setCertificationEnabled(courseDetails.isCertificationEnabled());
         course.setStatus(courseDetails.getStatus());
         course.setCreatedBy(courseDetails.getCreatedBy());
-        course.setUpdatedAt(courseDetails.getUpdatedAt());
+        course.setFree(courseDetails.isFree());
+        // updatedAt is handled by @PreUpdate
 
         Course updated = courseRepository.save(course);
         return CourseMapper.courseDTO(updated);
