@@ -18,4 +18,8 @@ public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Long
      // Delete all question mappings of a Quiz
 
     void deleteByQuizId(Long quizId);
+
+    // Validation method
+    boolean existsByQuizIdAndQuestionId(Long quizId, Long questionId);
+
 }

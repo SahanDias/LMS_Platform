@@ -14,4 +14,11 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
      // Get answers by Question ID
 
     List<Answer> findByQuestionQuestionId(Long questionId);
+
+    // Validation method
+
+    boolean existsByAnswerIdAndQuestionQuestionId(Long answerId, Long questionId);
+
+
+
 }

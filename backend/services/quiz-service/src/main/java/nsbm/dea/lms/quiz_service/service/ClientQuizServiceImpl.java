@@ -10,16 +10,22 @@ import nsbm.dea.lms.quiz_service.dto.SubmittedAnswer;
 import nsbm.dea.lms.quiz_service.entity.Answer;
 import nsbm.dea.lms.quiz_service.entity.Question;
 import nsbm.dea.lms.quiz_service.entity.Quiz;
+import nsbm.dea.lms.quiz_service.entity.QuizAttempt;
 import nsbm.dea.lms.quiz_service.entity.QuizQuestion;
 import nsbm.dea.lms.quiz_service.entity.QuizStatus;
+import nsbm.dea.lms.quiz_service.exception.BadRequestException;
 import nsbm.dea.lms.quiz_service.exception.ResourceNotFoundException;
 import nsbm.dea.lms.quiz_service.repository.AnswerRepository;
 import nsbm.dea.lms.quiz_service.repository.QuestionRepository;
+import nsbm.dea.lms.quiz_service.repository.QuizAttemptRepository;
 import nsbm.dea.lms.quiz_service.repository.QuizQuestionRepository;
 import nsbm.dea.lms.quiz_service.repository.QuizRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -33,19 +39,24 @@ public class ClientQuizServiceImpl implements ClientQuizService {
     private final QuizQuestionRepository quizQuestionRepository;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final QuizAttemptRepository quizAttemptRepository;
+
+    // limit (simple rule)
+    private static final int MAX_ATTEMPTS = 3;
 
     public ClientQuizServiceImpl(QuizRepository quizRepository,
                                  QuizQuestionRepository quizQuestionRepository,
                                  QuestionRepository questionRepository,
-                                 AnswerRepository answerRepository) {
+                                 AnswerRepository answerRepository,
+                                 QuizAttemptRepository quizAttemptRepository) {
         this.quizRepository = quizRepository;
         this.quizQuestionRepository = quizQuestionRepository;
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
+        this.quizAttemptRepository = quizAttemptRepository;
     }
 
-     // Student sees ACTIVE quizzes under a class
-
+    // Student sees ACTIVE quizzes under a class
     @Override
     public List<QuizSummaryResponse> getActiveQuizzesByClassId(Long classId) {
 
@@ -70,9 +81,9 @@ public class ClientQuizServiceImpl implements ClientQuizService {
       Student starts a quiz:
       - quiz must exist
       - quiz must be ACTIVE
-      - load selected questions (QuizQuestion table)
-      - load answers for each question
-      - IMPORTANT: return answers WITHOUT correct flags
+      - load selected questions
+      - shuffle questions (random order)
+      - return answers WITHOUT correct flags
     */
     @Override
     public StartQuizResponse startQuiz(Long quizId) {
@@ -84,14 +95,13 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             throw new ResourceNotFoundException("Quiz is not ACTIVE: " + quizId);
         }
 
-        // Your repository method is findByQuizId(...)
         List<QuizQuestion> quizQuestions = quizQuestionRepository.findByQuizId(quizId);
+        Collections.shuffle(quizQuestions);
 
         List<QuestionViewResponse> questionResponses = new ArrayList<>();
 
         for (QuizQuestion qq : quizQuestions) {
 
-            // Your QuizQuestion stores questionId
             Long questionId = qq.getQuestionId();
 
             Question question = questionRepository.findById(questionId)
@@ -102,7 +112,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             List<AnswerOptionResponse> answerResponses = new ArrayList<>();
 
             for (Answer answer : answers) {
-                // DO NOT send correct flag to student
                 AnswerOptionResponse answerDto =
                         new AnswerOptionResponse(answer.getAnswerId(), answer.getAnswerText());
                 answerResponses.add(answerDto);
@@ -127,11 +136,13 @@ public class ClientQuizServiceImpl implements ClientQuizService {
     }
 
     /*
-      Student submits quiz attempt:
-      - quiz must exist and ACTIVE
-      - calculate correct answers
-      - calculate score percentage
-      - passed if score >= passingScore
+      submitQuiz FINAL:
+      - validate request (studentId, startedAt, answers)
+      - enforce attempt limit
+      - enforce timer
+      - validate answers (anti-cheat)
+      - calculate score
+      - save attempt
     */
     @Override
     public SubmitQuizResponse submitQuiz(Long quizId, SubmitQuizRequest request) {
@@ -140,31 +151,85 @@ public class ClientQuizServiceImpl implements ClientQuizService {
                 .orElseThrow(() -> new ResourceNotFoundException("Quiz not found: " + quizId));
 
         if (quiz.getStatus() != QuizStatus.ACTIVE) {
-            throw new ResourceNotFoundException("Quiz is not ACTIVE: " + quizId);
+            throw new BadRequestException("Quiz is not ACTIVE: " + quizId);
         }
 
-        // Total questions should be based on selected questions for quiz
+        // Validate request fields
+        if (request == null) {
+            throw new BadRequestException("Request body is missing.");
+        }
+        if (request.getStudentId() == null) {
+            throw new BadRequestException("studentId is required.");
+        }
+        if (request.getStartedAt() == null) {
+            throw new BadRequestException("startedAt is required.");
+        }
+        if (request.getAnswers() == null || request.getAnswers().isEmpty()) {
+            throw new BadRequestException("answers list is empty.");
+        }
+
+        Long studentId = request.getStudentId();
+
+        // Attempt limit check
+        long usedAttempts = quizAttemptRepository.countByQuizIdAndStudentId(quizId, studentId);
+        if (usedAttempts >= MAX_ATTEMPTS) {
+            throw new BadRequestException("Maximum attempts reached for this quiz.");
+        }
+
+        // Timer enforcement
+        LocalDateTime now = LocalDateTime.now();
+        long minutesTaken = Duration.between(request.getStartedAt(), now).toMinutes();
+
+        if (quiz.getTimeLimitMinutes() != null && minutesTaken > quiz.getTimeLimitMinutes()) {
+            throw new BadRequestException("Quiz time limit exceeded.");
+        }
+
+        // Total questions = selected questions count
         List<QuizQuestion> selectedQuestions = quizQuestionRepository.findByQuizId(quizId);
         int totalQuestions = selectedQuestions.size();
 
         int correctCount = 0;
 
-        // If student sends answers
-        if (request != null && request.getAnswers() != null) {
+        // Prevent duplicate question submission
+        List<Long> seenQuestions = new ArrayList<>();
 
-            for (SubmittedAnswer submitted : request.getAnswers()) {
+        // Validate each submitted answer (anti-cheat)
+        for (SubmittedAnswer submitted : request.getAnswers()) {
 
-                // Load selected answer from DB
-                Answer answer = answerRepository.findById(submitted.getAnswerId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Answer not found: " + submitted.getAnswerId()));
+            if (submitted.getQuestionId() == null || submitted.getAnswerId() == null) {
+                throw new BadRequestException("questionId and answerId must not be null.");
+            }
 
-                // Count correct answers
-                if (answer.isCorrect()) {
-                    correctCount++;
-                }
+            Long questionId = submitted.getQuestionId();
+            Long answerId = submitted.getAnswerId();
+
+            if (seenQuestions.contains(questionId)) {
+                throw new BadRequestException("Duplicate answer submitted for questionId: " + questionId);
+            }
+            seenQuestions.add(questionId);
+
+            // Question must belong to quiz
+            boolean questionInQuiz = quizQuestionRepository.existsByQuizIdAndQuestionId(quizId, questionId);
+            if (!questionInQuiz) {
+                throw new BadRequestException("Question " + questionId + " does not belong to quiz " + quizId);
+            }
+
+            // Answer must belong to question
+            boolean answerInQuestion = answerRepository.existsByAnswerIdAndQuestionQuestionId(answerId, questionId);
+            if (!answerInQuestion) {
+                throw new BadRequestException("Answer " + answerId + " does not belong to question " + questionId);
+            }
+
+            // Now check correctness
+            Answer answer = answerRepository.findById(answerId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Answer not found: " + answerId));
+
+            if (answer.isCorrect()) {
+                correctCount++;
             }
         }
 
+        // Calculate score
         int scorePercentage = 0;
         if (totalQuestions > 0) {
             scorePercentage = (correctCount * 100) / totalQuestions;
@@ -172,6 +237,18 @@ public class ClientQuizServiceImpl implements ClientQuizService {
 
         boolean passed = scorePercentage >= quiz.getPassingScore();
 
+        // Save attempt in DB
+        QuizAttempt attempt = new QuizAttempt();
+        attempt.setQuizId(quizId);
+        attempt.setStudentId(studentId);
+        attempt.setScorePercentage(scorePercentage);
+        attempt.setPassed(passed);
+        attempt.setStartedAt(request.getStartedAt());
+        attempt.setSubmittedAt(now);
+
+        quizAttemptRepository.save(attempt);
+
+        // Response
         SubmitQuizResponse response = new SubmitQuizResponse();
         response.setTotalQuestions(totalQuestions);
         response.setCorrectAnswers(correctCount);
