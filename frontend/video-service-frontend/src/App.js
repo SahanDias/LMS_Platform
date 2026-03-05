@@ -4,7 +4,7 @@ import VideoLessonPage from './pages/VideoLessonPage';
 function App() {
   return (
     <div className="App">
-      <VideoLessonPage videoId={5} studentId={500} />
+      <VideoLessonPage videoId={2} studentId={100} />
     </div>
   );
 }

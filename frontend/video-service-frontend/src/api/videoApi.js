@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/videos';
+const API_BASE_URL = 'http://localhost:8083/videos';
 
 /**
  * Get a video by its ID
