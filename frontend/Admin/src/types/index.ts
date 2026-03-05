@@ -1,14 +1,17 @@
 export interface Course {
-  id: string;
+  id: number;
+  courseCode: string;
   title: string;
   description: string;
-  instructor: string;
-  category: string;
+  thumbnailImgUrl: string;
   price: number;
-  duration: string;
-  status: "published" | "draft" | "archived";
-  enrolledCount: number;
+  passingPercentage: number;
+  certificationEnabled: boolean;
+  isFree: boolean;
+  status: "ACTIVE" | "INACTIVE";
+  createdBy: number | null;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface Certification {

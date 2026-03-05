@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 public class CourseDTO {
     private Long id;
+    private String courseCode;
     private String title;
     private String description;
     private String thumbnailImgUrl;
@@ -15,6 +16,7 @@ public class CourseDTO {
     private Long createdBy;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private boolean isFree;
 
     public CourseDTO() {
     }
@@ -25,6 +27,14 @@ public class CourseDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getTitle() {
@@ -105,5 +115,13 @@ public class CourseDTO {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        isFree = free;
     }
 }
