@@ -33,6 +33,8 @@ export interface Quiz {
   questionsCount: number;
   duration: number;
   passingScore: number;
+  questionOrder: "SEQUENTIAL" | "RANDOM";
+  examRequirement: "OPTIONAL" | "MUST_TAKE" | "MUST_PASS";
   status: "active" | "inactive";
   attemptsCount: number;
 }
