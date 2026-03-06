@@ -12,6 +12,10 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
     proxy: {
+      "/api": {
+        target: "http://localhost:7878",
+        changeOrigin: true,
+      },
       "/class-api": {
         target: "http://localhost:8080",
         changeOrigin: true,

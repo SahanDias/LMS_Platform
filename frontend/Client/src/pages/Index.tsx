@@ -1,27 +1,37 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import CourseCard from "@/components/CourseCard";
 import CourseFilters from "@/components/CourseFilters";
-import { courses } from "@/lib/data";
+import { coursesApi, type Course } from "@/services/api";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    coursesApi
+      .getAll()
+      .then(setCourses)
+      .catch(() => toast({ title: "Failed to load courses", variant: "destructive" }))
+      .finally(() => setLoading(false));
+  }, [toast]);
 
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
+      if (course.status !== "ACTIVE") return false;
       const matchesSearch =
         course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.instructor.toLowerCase().includes(searchQuery.toLowerCase());
+        course.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesCategory =
-        selectedCategory === "All" || course.category === selectedCategory;
-
-      return matchesSearch && matchesCategory;
+      return matchesSearch;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [courses, searchQuery]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,14 +48,22 @@ const Index = () => {
           </p>
         </div>
 
-        <CourseFilters
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
+        <div className="mb-8 relative">
+          <input
+            placeholder="Search courses..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 rounded-md border border-input bg-background text-sm"
+          />
+        </div>
 
-        {filteredCourses.length > 0 ? (
+        {loading ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="h-72 w-full rounded-lg" />
+            ))}
+          </div>
+        ) : filteredCourses.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredCourses.map((course) => (
               <CourseCard key={course.id} course={course} />

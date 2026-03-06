@@ -1,4 +1,22 @@
-// ── Types ────────────────────────────────────────────
+// ── Course Types ─────────────────────────────────────
+
+export interface Course {
+  id: number;
+  courseCode: string;
+  title: string;
+  description: string;
+  thumbnailImgUrl: string | null;
+  price: number;
+  passingPercentage: number;
+  certificationEnabled: boolean;
+  isFree: boolean;
+  status: "ACTIVE" | "INACTIVE";
+  createdBy: number | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ── Class Types ──────────────────────────────────────
 
 export type ClassStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
 
@@ -23,7 +41,30 @@ export interface ScheduleDTO {
   scheduleOpen: boolean | null;
 }
 
-// ── API ──────────────────────────────────────────────
+// ── Course API ───────────────────────────────────────
+
+const COURSE_API = "/api/v1/course";
+
+function mapCourse(raw: any): Course {
+  return { ...raw, isFree: raw.free ?? raw.isFree ?? false };
+}
+
+export const coursesApi = {
+  getAll: async (): Promise<Course[]> => {
+    const res = await fetch(COURSE_API);
+    if (!res.ok) throw new Error("Failed to fetch courses");
+    const data: any[] = await res.json();
+    return data.map(mapCourse);
+  },
+  getById: async (id: number): Promise<Course> => {
+    const res = await fetch(`${COURSE_API}/getCourse/${id}`);
+    if (!res.ok) throw new Error("Course not found");
+    const raw = await res.json();
+    return mapCourse(raw);
+  },
+};
+
+// ── Class Schedule API ───────────────────────────────
 
 const CLASS_API = "/class-api/v1";
 
@@ -37,6 +78,9 @@ async function apiFetch<T>(url: string): Promise<T> {
 }
 
 export const classScheduleApi = {
+  getAll: (courseId: string): Promise<ClassEntity[]> =>
+    apiFetch(`/courses/${courseId}/classes`),
+
   getOrdered: (courseId: string): Promise<ClassEntity[]> =>
     apiFetch(`/courses/${courseId}/classes/ordered`),
 
