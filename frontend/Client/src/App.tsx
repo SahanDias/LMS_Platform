@@ -8,6 +8,7 @@ import MyCourses from "./pages/MyCourses";
 import Certificates from "./pages/Certificates";
 import CourseDetail from "./pages/CourseDetail";
 import NotFound from "./pages/NotFound";
+import StudentCourseClassesPage from "./pages/StudentCourseClassesPage";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/my-courses" element={<MyCourses />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/course/:id" element={<CourseDetail />} />
+          <Route path="/course/:courseId/classes" element={<StudentCourseClassesPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

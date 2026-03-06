@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/service_class-schedule.iml" filepath="$PROJECT_DIR$/.idea/service_class-schedule.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LMS_Platform.iml" filepath="$PROJECT_DIR$/.idea/LMS_Platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/service_class-schedule.iml" filepath="$PROJECT_DIR$/.idea/service_class-schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/services/video-service/video-service.iml" filepath="$PROJECT_DIR$/backend/services/video-service/video-service.iml" />
     </modules>
   </component>
 </project>

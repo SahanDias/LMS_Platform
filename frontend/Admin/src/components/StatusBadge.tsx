@@ -6,14 +6,17 @@ interface StatusBadgeProps {
 
 const statusStyles: Record<string, string> = {
   published: "bg-success/10 text-success border-success/20",
+  PUBLISHED: "bg-success/10 text-success border-success/20",
   active: "bg-success/10 text-success border-success/20",
   ACTIVE: "bg-success/10 text-success border-success/20",
   succeeded: "bg-success/10 text-success border-success/20",
   draft: "bg-warning/10 text-warning border-warning/20",
+  DRAFT: "bg-warning/10 text-warning border-warning/20",
   pending: "bg-warning/10 text-warning border-warning/20",
   inactive: "bg-muted text-muted-foreground border-border",
   INACTIVE: "bg-muted text-muted-foreground border-border",
   archived: "bg-muted text-muted-foreground border-border",
+  ARCHIVED: "bg-muted text-muted-foreground border-border",
   expired: "bg-destructive/10 text-destructive border-destructive/20",
   failed: "bg-destructive/10 text-destructive border-destructive/20",
   revoked: "bg-destructive/10 text-destructive border-destructive/20",

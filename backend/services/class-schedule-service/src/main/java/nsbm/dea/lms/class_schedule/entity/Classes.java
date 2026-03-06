@@ -21,9 +21,8 @@ public class Classes {
     @Column(name = "id", columnDefinition = "CHAR(36)")
     private UUID id;
 
-    @Column(name = "course_id", nullable = true, columnDefinition = "CHAR(36)")
-    @JdbcTypeCode(SqlTypes.CHAR)
-    private UUID courseId;
+    @Column(name = "course_id", nullable = true)
+    private Long courseId;
     private String title;
     private String description;
     @Enumerated(EnumType.STRING)

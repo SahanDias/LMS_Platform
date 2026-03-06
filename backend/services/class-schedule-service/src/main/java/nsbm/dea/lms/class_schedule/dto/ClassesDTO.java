@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 import nsbm.dea.lms.class_schedule.constant.ClassStatus;
 
-import java.util.UUID;
-
 @Data
 public class ClassesDTO {
     @JsonAlias("course_id")
-    private UUID courseId;
+    private Long courseId;
     private String title;
     private String description;
     private ClassStatus status;

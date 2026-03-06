@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap } from "lucide-react";
+import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap, CalendarDays } from "lucide-react";
 
 const links = [
   { to: "/", icon: LayoutDashboard, label: "Dashboard" },
@@ -8,6 +8,7 @@ const links = [
   { to: "/certifications", icon: Award, label: "Certifications" },
   { to: "/quizzes", icon: HelpCircle, label: "Quizzes" },
   { to: "/payments", icon: CreditCard, label: "Payments" },
+  { to: "/class-schedule", icon: CalendarDays, label: "Class Schedule" },
 ];
 
 const AdminSidebar = () => {

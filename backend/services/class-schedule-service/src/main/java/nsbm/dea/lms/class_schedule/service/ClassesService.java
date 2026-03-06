@@ -25,8 +25,13 @@ public class ClassesService {
     private final ModelMapper modelMapper;
 
     public Classes createClass(ClassesDTO dto) {
-        Classes classes = modelMapper.map(dto, Classes.class);
-        classes.setId(null);
+        Classes classes = new Classes();
+        classes.setCourseId(dto.getCourseId());
+        classes.setTitle(dto.getTitle());
+        classes.setDescription(dto.getDescription());
+        classes.setStatus(dto.getStatus());
+        classes.setIsFree(dto.getIsFree());
+        classes.setPosition(dto.getPosition());
         if (classes.getStatus() == null) {
             classes.setStatus(ClassStatus.DRAFT);
         }
@@ -68,7 +73,7 @@ public class ClassesService {
         classesRepository.delete(existing);
     }
 
-    public List<Classes> getClassesByCourse(UUID courseId, ClassStatus status) {
+    public List<Classes> getClassesByCourse(Long courseId, ClassStatus status) {
         if (status == null) {
             return classesRepository.findByCourseIdOrderByPositionAsc(courseId);
         }
@@ -95,7 +100,7 @@ public class ClassesService {
         return toScheduleDTO(existing);
     }
 
-    public void reorderClasses(UUID courseId, List<ReorderItemDTO> items) {
+    public void reorderClasses(Long courseId, List<ReorderItemDTO> items) {
         if (items == null || items.isEmpty()) {
             return;
         }
@@ -115,7 +120,7 @@ public class ClassesService {
         classesRepository.saveAll(classesList);
     }
 
-    public List<Classes> getOrderedStudentClasses(UUID courseId) {
+    public List<Classes> getOrderedStudentClasses(Long courseId) {
         return classesRepository.findByCourseIdAndStatusAndScheduleOpenTrueOrderByPositionAsc(
                 courseId,
                 ClassStatus.PUBLISHED

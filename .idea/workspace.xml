@@ -5,19 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_15_2026_7_26_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/components/AdminSidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/components/AdminSidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/components/StatusBadge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/components/StatusBadge.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/api/videoApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/pages/VideoLessonPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +55,7 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_C:/Users/Rasa/Downloads/service_class-schedule" value="3AYnml9b1UVObcqZ8uEKBMltBYW" />
       <entry key="_C:/Users/Rasa/Downloads/service_class-schedule/backend/services/video-service" value="39D7RwgjdGzYKYCeR71HDcebA90" />
     </persistenceIdMap>
   </component>
@@ -42,6 +72,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rasan178"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SahanDias/LMS_Platform.git",
+    "accountId": "d40eee81-36a5-4d6b-b403-decadc55d717"
+  }
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -84,7 +126,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.Application.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "class-schedule-service-dev-rasan",
+    "git-widget-placeholder": "class-schedule-service-dev2-rasan",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rasa/Downloads/service_class-schedule",
@@ -93,6 +135,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.tools",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -102,11 +148,19 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="service-class-schedule" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.class_schedule.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LmsCourseServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="course-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.course.LmsCourseServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,6 +185,7 @@
       <workItem from="1770524294626" duration="4006000" />
       <workItem from="1771162081908" duration="1714000" />
       <workItem from="1771948396398" duration="1605000" />
+      <workItem from="1772778526754" duration="4003000" />
     </task>
     <servers />
   </component>

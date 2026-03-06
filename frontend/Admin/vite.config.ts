@@ -6,7 +6,7 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 3000,
     hmr: {
       overlay: false,
     },
@@ -14,6 +14,11 @@ export default defineConfig(({ mode }) => ({
       "/api": {
         target: "http://localhost:7878",
         changeOrigin: true,
+      },
+      "/class-api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/class-api/, "/api"),
       },
     },
   },

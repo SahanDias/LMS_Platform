@@ -1,4 +1,4 @@
-import { Course, Certification, Quiz, Payment } from "@/types";
+import { Course, Certification, Quiz, Payment, ClassEntity, ClassesDTO, ScheduleDTO, ReorderItemDTO, ClassStatus } from "@/types";
 
 const API_BASE = "/api/v1/course";
 
@@ -136,4 +136,48 @@ export const dashboardApi = {
       ],
     };
   },
+};
+
+// --- CLASS SCHEDULE SERVICE ---
+const CLASS_API = "/class-api/v1";
+
+async function classApiFetch<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(`${CLASS_API}${url}`, {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.message || body?.error || `Request failed (${res.status})`);
+  }
+  if (res.status === 204) return undefined as T;
+  return res.json();
+}
+
+export const classScheduleApi = {
+  create: (dto: ClassesDTO): Promise<ClassEntity> =>
+    classApiFetch("/classes/create-class", { method: "POST", body: JSON.stringify(dto) }),
+
+  update: (classId: string, dto: Partial<ClassesDTO>): Promise<ClassEntity> =>
+    classApiFetch(`/classes/${classId}`, { method: "PUT", body: JSON.stringify(dto) }),
+
+  delete: (classId: string): Promise<void> =>
+    classApiFetch(`/classes/${classId}`, { method: "DELETE" }),
+
+  getByCourse: (courseId: string, status?: ClassStatus): Promise<ClassEntity[]> => {
+    const qs = status ? `?status=${status}` : "";
+    return classApiFetch(`/courses/${courseId}/classes${qs}`);
+  },
+
+  getSchedule: (classId: string): Promise<ScheduleDTO> =>
+    classApiFetch(`/classes/${classId}/schedule`),
+
+  updateSchedule: (classId: string, dto: ScheduleDTO): Promise<ScheduleDTO> =>
+    classApiFetch(`/classes/${classId}/schedule`, { method: "PUT", body: JSON.stringify(dto) }),
+
+  reorder: (courseId: string, items: ReorderItemDTO[]): Promise<void> =>
+    classApiFetch(`/courses/${courseId}/classes/reorder`, { method: "PUT", body: JSON.stringify(items) }),
+
+  getOrdered: (courseId: string): Promise<ClassEntity[]> =>
+    classApiFetch(`/courses/${courseId}/classes/ordered`),
 };

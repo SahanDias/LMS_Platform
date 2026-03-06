@@ -51,3 +51,42 @@ export interface Payment {
   method: string;
   createdAt: string;
 }
+
+// ── Class Schedule Service ────────────────────────────
+
+export type ClassStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
+
+export interface ClassEntity {
+  id: string;
+  courseId: number;
+  title: string;
+  description: string | null;
+  status: ClassStatus;
+  isFree: boolean | null;
+  scheduleStartAt: string | null;
+  scheduleEndAt: string | null;
+  scheduleOpen: boolean | null;
+  position: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ClassesDTO {
+  courseId: number;
+  title: string;
+  description?: string;
+  status?: ClassStatus;
+  isFree?: boolean;
+  position?: number;
+}
+
+export interface ScheduleDTO {
+  scheduleStartAt: string | null;
+  scheduleEndAt: string | null;
+  scheduleOpen: boolean | null;
+}
+
+export interface ReorderItemDTO {
+  classId: string;
+  position: number;
+}
