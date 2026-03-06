@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Enrollment API + catalog (courses/classes from course service) + course proxy.
- */
+
 @RestController
 @RequiredArgsConstructor
 public class EnrollmentController {

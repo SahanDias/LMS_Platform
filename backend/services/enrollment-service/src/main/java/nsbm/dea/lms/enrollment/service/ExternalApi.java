@@ -12,10 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * One small place for calling other microservices (course/class/payment/progress).
- * Keeps the rest of the codebase simple (no separate client package).
- */
+
 @Component
 public class ExternalApi {
 

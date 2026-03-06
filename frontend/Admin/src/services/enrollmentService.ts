@@ -1,8 +1,3 @@
-/**
- * Enrollment Service API client.
- * Connects to the enrollment-service backend (default: http://localhost:8082).
- */
-
 const ENROLLMENT_API_BASE = import.meta.env.VITE_ENROLLMENT_API_URL || "";
 
 // ─── Types (aligned with backend DTOs) ─────────────────────────────────────

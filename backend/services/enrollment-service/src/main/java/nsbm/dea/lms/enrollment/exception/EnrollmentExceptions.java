@@ -1,6 +1,6 @@
 package nsbm.dea.lms.enrollment.exception;
 
-/** All enrollment-related exceptions in one file. */
+
 public final class EnrollmentExceptions {
 
     private EnrollmentExceptions() {}
