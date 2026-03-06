@@ -1,3 +1,30 @@
 spring:
   application:
-    name: LMS Enrollment Service
+    name: enrollment-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/enrollment_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: enrollment_user
+    password: "#Kshan@678#"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8084
+
+# External service URLs. Course service is the source of course data (port 8081).
+services:
+  course:
+    base-url: http://localhost:7878
+  class:
+    base-url: http://localhost:8080
+  payment:
+    base-url: http://localhost:7788
+  progress:
+    base-url: http://localhost:9000

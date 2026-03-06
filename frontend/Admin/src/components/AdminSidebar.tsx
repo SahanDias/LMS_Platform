@@ -1,10 +1,11 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap } from "lucide-react";
+import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap, Users } from "lucide-react";
 
 const links = [
   { to: "/", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/courses", icon: BookOpen, label: "Courses" },
+  { to: "/enrollment", icon: Users, label: "Enrollment" },
   { to: "/certifications", icon: Award, label: "Certifications" },
   { to: "/quizzes", icon: HelpCircle, label: "Quizzes" },
   { to: "/payments", icon: CreditCard, label: "Payments" },
