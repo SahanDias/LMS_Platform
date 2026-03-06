@@ -11,11 +11,8 @@ import CertificationsPage from "./pages/CertificationsPage";
 import QuizzesPage from "./pages/QuizzesPage";
 import PaymentsPage from "./pages/PaymentsPage";
 import NotFound from "./pages/NotFound";
-<<<<<<< HEAD
 import QuestionBankPage from "./pages/QuestionBankPage";
-=======
 import AdminClassesPage from "./pages/AdminClassesPage";
->>>>>>> 594c6592bb5192a3c8e75dc81b071d25bef0bb4f
 
 const queryClient = new QueryClient();
 
@@ -40,9 +37,9 @@ const App = () => (
             <Route path="/payments" element={<ProtectedRoute><PaymentsPage /></ProtectedRoute>} />
             <Route path="/class-schedule" element={<ProtectedRoute><AdminClassesPage /></ProtectedRoute>} />
             <Route path="/courses/:courseId/classes" element={<ProtectedRoute><AdminClassesPage /></ProtectedRoute>} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/admin/quizzes/:quizId/questions"element={<ProtectedRoute><QuestionBankPage /></ProtectedRoute>}/>
+            <Route path="/admin/quizzes/:quizId/questions" element={<ProtectedRoute><QuestionBankPage /></ProtectedRoute>} />
             <Route path="/admin/quizzes" element={<QuizzesPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
