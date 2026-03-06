@@ -185,7 +185,7 @@ export default function AdminDashboard() {
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div style={{ width: "36px", height: "36px", background: "#e8ff47", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px" }}>⚡</div>
           <div>
-            <div style={{ color: "#ffffff", fontSize: "16px", fontFamily: "'Syne', sans-serif", fontWeight: "800", letterSpacing: "-0.02em" }}>Lumina Learn</div>
+            <div style={{ color: "#ffffff", fontSize: "16px", fontFamily: "'Syne', sans-serif", fontWeight: "800", letterSpacing: "-0.02em" }}>EduAdmin</div>
             <div style={{ color: "#6b7a9a", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase" }}>Learning Platform</div>
           </div>
         </div>
