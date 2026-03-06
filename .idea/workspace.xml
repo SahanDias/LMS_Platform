@@ -5,334 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/config/ModelMapperConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/constant/ClassStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/controller/ClassesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ClassesDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ReorderItemDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/dto/ScheduleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/entity/Classes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/repository/ClassesRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/java/nsbm/dea/lms/class_schedule/service/ClassesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/class-schedule-service/src/test/java/nsbm/dea/lms/class_schedule/ApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/controller/CourseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/dto/CourseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/entity/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/exception/CourseNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/mapper/CourseMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/repository/CourseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/java/nsbm/dea/lms/course/service/CourseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/New Text Document.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/src/main/java/nsbm/dea/lms/enrollment_service/LmsEnrollmentServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/enrollment-service/src/test/java/nsbm/dea/lms/enrollment_service/LmsEnrollmentServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/LmsCourseServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/config/RestTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/controller/NotificationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/dto/CourseNotificationApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/dto/NotificationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/dto/PaymentNotificationApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/entity/CourseNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/entity/PaymentNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/repository/CourseNotificationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/repository/PaymentNotificationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/service/NotificationQueryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/java/nsbm/dea/lms/notification/service/NotificationSyncService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/notification-service/src/test/java/nsbm/dea/lms/notification/LmsCourseServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/LmsPaymentServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/config/StripeConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/controller/StripeWebhookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/entity/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/java/nsbm/dea/lms/payment_service/service/StripeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/payment-service/src/test/java/nsbm/dea/lms/payment_service/LmsPaymentServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/client/EnrollmentServiceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/client/ProgressServiceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/config/RestTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/controller/VideoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/entity/Video.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/entity/VideoCompletion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/repository/VideoCompletionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/repository/VideoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/com/lms/videoservice/service/VideoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/nsbm/dea/lms/video/LmsVideoServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/java/nsbm/dea/lms/video/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/video-service/src/test/java/nsbm/dea/lms/video/LmsVideoServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/bun.lockb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/components.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/eslint.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/nginx.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/postcss.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/public/admin-gradCap.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/public/graduation-cap.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/public/placeholder.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/AdminLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/AdminSidebar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/NavLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/StatCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/StatusBadge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/accordion.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/alert-dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/alert.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/aspect-ratio.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/avatar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/badge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/breadcrumb.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/calendar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/card.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/carousel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/chart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/checkbox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/collapsible.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/command.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/context-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/drawer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/hover-card.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/input-otp.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/input.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/label.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/menubar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/navigation-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/pagination.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/popover.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/progress.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/radio-group.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/resizable.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/scroll-area.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/select.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/separator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/sheet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/sidebar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/skeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/slider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/sonner.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/switch.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/table.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/tabs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/textarea.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/toast.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/toaster.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/toggle-group.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/toggle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/tooltip.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/components/ui/use-toast.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/contexts/AuthContext.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/hooks/use-mobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/hooks/use-toast.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/lib/utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/CertificationsPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/CoursesPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/Dashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/Index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/LoginPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/NotFound.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/PaymentsPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/pages/QuizzesPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/services/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/test/example.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/test/setup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/types/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/src/vite-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/tailwind.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/tsconfig.node.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/vite.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Admin/vitest.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/bun.lockb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/components.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/eslint.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/nginx.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/postcss.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/public/Client-GradCap.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/public/graduation-cap.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/public/placeholder.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/assets/hero-bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/AnimatedLogo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/CertificateCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/CertificateViewer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/CourseCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/CourseFilters.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/HeroLogo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/HeroSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/NavLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/accordion.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/alert-dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/alert.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/aspect-ratio.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/avatar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/badge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/breadcrumb.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/calendar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/card.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/carousel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/chart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/checkbox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/collapsible.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/command.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/context-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/drawer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/hover-card.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/input-otp.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/input.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/label.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/menubar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/navigation-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/pagination.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/popover.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/progress.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/radio-group.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/resizable.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/scroll-area.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/select.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/separator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/sheet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/sidebar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/skeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/slider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/sonner.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/switch.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/table.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/tabs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/textarea.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/toast.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/toaster.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/toggle-group.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/toggle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/tooltip.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/components/ui/use-toast.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/hooks/use-mobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/hooks/use-toast.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/lib/data.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/lib/utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/Certificates.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/CourseDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/Index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/MyCourses.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/NotFound.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/PaymentFailed.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/pages/PaymentSuccess.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/services/courseApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/services/paymentApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/test/example.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/test/setup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/src/vite-env.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/tailwind.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/tsconfig.node.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/vite.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Client/vitest.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/api/videoApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/pages/VideoLessonPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/reportWebVitals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/video-service-frontend/src/setupTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/LMS_Platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LMS_Platform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/course-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/course-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/course-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,6 +18,7 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_C:/Users/FILE/Desktop/New folder/LMS_Platform" value="3AWwqfEO6LqBlg5XV0Cp2qvw0hL" />
+      <entry key="_C:/Users/HI/Documents/GitHub/LMS_Platform/.idea" value="3AYwF3gkrrkxtTlutAzF3XiNvDG" />
       <entry key="_C:/Users/Rasa/Downloads/service_class-schedule/backend/services/video-service" value="39D7RwgjdGzYKYCeR71HDcebA90" />
     </persistenceIdMap>
   </component>
@@ -407,8 +84,9 @@
     "Spring Boot.Application.executor": "Run",
     "Spring Boot.LmsCourseServiceApplication.executor": "Run",
     "Spring Boot.LmsPaymentServiceApplication.executor": "Run",
+    "Spring Boot.LmsQuizServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Merging certificate-service-dev4-fazla",
+    "git-widget-placeholder": "quiz-service-dev2-pavani",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -448,7 +126,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.LmsCourseServiceApplication">
+  <component name="RunManager" selected="Spring Boot.LmsQuizServiceApplication">
     <configuration name="LmsCourseServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nsbm.dea.lms.course.LmsCourseServiceApplication" />
       <module name="course-service" />
@@ -505,12 +183,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LmsQuizServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="quiz-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.quiz_service.LmsQuizServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LmsPaymentServiceApplication" />
         <item itemvalue="Application.LmsCourseServiceApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -523,6 +217,7 @@
       <workItem from="1770524294626" duration="4006000" />
       <workItem from="1771162081908" duration="1714000" />
       <workItem from="1771948396398" duration="1605000" />
+      <workItem from="1772782694320" duration="335000" />
     </task>
     <servers />
   </component>
