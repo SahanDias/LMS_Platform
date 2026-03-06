@@ -13,7 +13,9 @@ public class Course {
     private Long id;
     private String courseCode;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "TEXT")
     private String thumbnailImgUrl;
     private BigDecimal price;
     private int passingPercentage;
