@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: lms_course_service
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - course-service-db-data:/var/lib/mysql
     healthcheck:
@@ -85,53 +85,43 @@ services:
       timeout: 5s
       retries: 10
 
-  enrollment-service:
-    build: ./backend/services/enrollment-service
-    container_name: enrollment-service
-    ports:
-      - "8084:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://enrollment-service-db:3306/lms_enrollment_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 12345
-    depends_on:
-      enrollment-service-db:
-        condition: service_healthy
-
-  # =========================
-  # PAYMENT SERVICE
-  # =========================
-  payment-service-db:
+  user-service-db:
     image: mysql:8.0
-    container_name: payment-service-db
+    container_name: user-service-db
     environment:
       MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: lms_payment_service
+      MYSQL_DATABASE: lms_user_service
     ports:
-      - "3310:3306"
+      - "3307:3306"
     volumes:
-      - payment-service-db-data:/var/lib/mysql
+      - user-service-db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 5
 
-  payment-service:
-    build: ./backend/services/payment-service
-    container_name: payment-service
+  user-service:
+    build: ./backend/services/user-service
+    container_name: user-service
     ports:
-      - "8083:8080"
+      - "7879:7879"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://payment-service-db:3306/lms_payment_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://user-service-db:3306/lms_user_service
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 12345
     depends_on:
-      payment-service-db:
+      user-service-db:
         condition: service_healthy
+
+  client-frontend:
+    build: ./frontend/Client
+    container_name: client-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - user-service
 
 volumes:
   course-service-db-data:
-  class-schedule-service-db-data:
-  enrollment-service-db-data:
-  payment-service-db-data:
+  user-service-db-data:
