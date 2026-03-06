@@ -10,7 +10,7 @@ import {
   classScheduleApi,
   type ClassEntity,
   type ScheduleDTO,
-} from "@/lib/classScheduleApi";
+} from "@/services/api";
 
 const statusStyles: Record<string, string> = {
   PUBLISHED: "bg-green-50 text-green-700 border-green-200",
