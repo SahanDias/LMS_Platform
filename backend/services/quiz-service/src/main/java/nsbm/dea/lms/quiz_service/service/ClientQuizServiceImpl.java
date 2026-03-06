@@ -41,9 +41,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
     private final AnswerRepository answerRepository;
     private final QuizAttemptRepository quizAttemptRepository;
 
-    // limit (simple rule)
-    private static final int MAX_ATTEMPTS = 3;
-
     public ClientQuizServiceImpl(QuizRepository quizRepository,
                                  QuizQuestionRepository quizQuestionRepository,
                                  QuestionRepository questionRepository,
@@ -82,7 +79,7 @@ public class ClientQuizServiceImpl implements ClientQuizService {
       - quiz must exist
       - quiz must be ACTIVE
       - load selected questions
-      - shuffle questions (random order)
+      - if no questions, block
       - return answers WITHOUT correct flags
     */
     @Override
@@ -96,6 +93,11 @@ public class ClientQuizServiceImpl implements ClientQuizService {
         }
 
         List<QuizQuestion> quizQuestions = quizQuestionRepository.findByQuizId(quizId);
+
+        if (quizQuestions.isEmpty()) {
+            throw new BadRequestException("No questions assigned to this quiz.");
+        }
+
         Collections.shuffle(quizQuestions);
 
         List<QuestionViewResponse> questionResponses = new ArrayList<>();
@@ -138,8 +140,11 @@ public class ClientQuizServiceImpl implements ClientQuizService {
     /*
       submitQuiz FINAL:
       - validate request (studentId, startedAt, answers)
-      - enforce attempt limit
+      - enforce attempt limit from quiz setting
+      - block future startedAt
       - enforce timer
+      - block if no questions assigned
+      - block too many answers
       - validate answers (anti-cheat)
       - calculate score
       - save attempt
@@ -154,7 +159,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             throw new BadRequestException("Quiz is not ACTIVE: " + quizId);
         }
 
-        // Validate request fields
         if (request == null) {
             throw new BadRequestException("Request body is missing.");
         }
@@ -170,30 +174,40 @@ public class ClientQuizServiceImpl implements ClientQuizService {
 
         Long studentId = request.getStudentId();
 
-        // Attempt limit check
         long usedAttempts = quizAttemptRepository.countByQuizIdAndStudentId(quizId, studentId);
-        if (usedAttempts >= MAX_ATTEMPTS) {
+        int allowedAttempts = quiz.getAttemptCount() != null ? quiz.getAttemptCount() : 1;
+
+        if (usedAttempts >= allowedAttempts) {
             throw new BadRequestException("Maximum attempts reached for this quiz.");
         }
 
-        // Timer enforcement
         LocalDateTime now = LocalDateTime.now();
+
+        if (request.getStartedAt().isAfter(now)) {
+            throw new BadRequestException("startedAt cannot be in the future.");
+        }
+
         long minutesTaken = Duration.between(request.getStartedAt(), now).toMinutes();
 
         if (quiz.getTimeLimitMinutes() != null && minutesTaken > quiz.getTimeLimitMinutes()) {
             throw new BadRequestException("Quiz time limit exceeded.");
         }
 
-        // Total questions = selected questions count
         List<QuizQuestion> selectedQuestions = quizQuestionRepository.findByQuizId(quizId);
+
+        if (selectedQuestions.isEmpty()) {
+            throw new BadRequestException("No questions assigned to this quiz.");
+        }
+
         int totalQuestions = selectedQuestions.size();
 
-        int correctCount = 0;
+        if (request.getAnswers().size() > totalQuestions) {
+            throw new BadRequestException("Too many answers submitted.");
+        }
 
-        // Prevent duplicate question submission
+        int correctCount = 0;
         List<Long> seenQuestions = new ArrayList<>();
 
-        // Validate each submitted answer (anti-cheat)
         for (SubmittedAnswer submitted : request.getAnswers()) {
 
             if (submitted.getQuestionId() == null || submitted.getAnswerId() == null) {
@@ -208,19 +222,16 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             }
             seenQuestions.add(questionId);
 
-            // Question must belong to quiz
             boolean questionInQuiz = quizQuestionRepository.existsByQuizIdAndQuestionId(quizId, questionId);
             if (!questionInQuiz) {
                 throw new BadRequestException("Question " + questionId + " does not belong to quiz " + quizId);
             }
 
-            // Answer must belong to question
             boolean answerInQuestion = answerRepository.existsByAnswerIdAndQuestionQuestionId(answerId, questionId);
             if (!answerInQuestion) {
                 throw new BadRequestException("Answer " + answerId + " does not belong to question " + questionId);
             }
 
-            // Now check correctness
             Answer answer = answerRepository.findById(answerId)
                     .orElseThrow(() -> new ResourceNotFoundException("Answer not found: " + answerId));
 
@@ -229,7 +240,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             }
         }
 
-        // Calculate score
         int scorePercentage = 0;
         if (totalQuestions > 0) {
             scorePercentage = (correctCount * 100) / totalQuestions;
@@ -237,7 +247,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
 
         boolean passed = scorePercentage >= quiz.getPassingScore();
 
-        // Save attempt in DB
         QuizAttempt attempt = new QuizAttempt();
         attempt.setQuizId(quizId);
         attempt.setStudentId(studentId);
@@ -248,7 +257,6 @@ public class ClientQuizServiceImpl implements ClientQuizService {
 
         quizAttemptRepository.save(attempt);
 
-        // Response
         SubmitQuizResponse response = new SubmitQuizResponse();
         response.setTotalQuestions(totalQuestions);
         response.setCorrectAnswers(correctCount);
