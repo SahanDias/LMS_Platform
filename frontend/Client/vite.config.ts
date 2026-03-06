@@ -12,14 +12,13 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
     proxy: {
-      "/api": {
-        target: "http://localhost:7878",
+      "/api/v1/auth": {
+        target: "http://localhost:7879",
         changeOrigin: true,
       },
-      "/payment-api": {
-        target: "http://localhost:8080",
+      "/api/v1/users": {
+        target: "http://localhost:7879",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/payment-api/, ""),
       },
     },
   },
