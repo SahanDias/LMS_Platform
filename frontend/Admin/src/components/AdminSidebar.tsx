@@ -29,7 +29,13 @@ const AdminSidebar = () => {
 
       <nav className="flex-1 px-3 py-4 space-y-1">
         {links.map(({ to, icon: Icon, label }) => {
-          const isActive = location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
+          const isClassSchedule = location.pathname.match(/^\/courses\/\d+\/classes/);
+          const isActive =
+            to === "/class-schedule"
+              ? location.pathname.startsWith("/class-schedule") || !!isClassSchedule
+              : to === "/courses"
+                ? location.pathname.startsWith("/courses") && !isClassSchedule
+                : location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
           return (
             <NavLink
               key={to}
