@@ -7,9 +7,19 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 8081,
     hmr: {
       overlay: false,
+    },
+    proxy: {
+      "/api/v1/auth": {
+        target: "http://localhost:7879",
+        changeOrigin: true,
+      },
+      "/api/v1/users": {
+        target: "http://localhost:7879",
+        changeOrigin: true,
+      },
     },
   },
   plugins: [react()],
