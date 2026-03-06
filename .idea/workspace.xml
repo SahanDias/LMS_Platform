@@ -5,10 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32084be9-4838-468a-8cef-ae15a442e23d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/Admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/quiz-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/quiz-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Admin/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Admin/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Client/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Client/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/api/videoApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/pages/VideoLessonPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/video-service-frontend/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +43,7 @@
     <persistenceIdMap>
       <entry key="_C:/Users/FILE/Desktop/New folder/LMS_Platform" value="3AWwqfEO6LqBlg5XV0Cp2qvw0hL" />
       <entry key="_C:/Users/HI/Documents/GitHub/LMS_Platform/.idea" value="3AYwF3gkrrkxtTlutAzF3XiNvDG" />
+      <entry key="_C:/Users/HI/Documents/GitHub/LMS_Platform/backend/services/quiz-service" value="3AZhyHEBHAlt64hMwyUNtY8zPq5" />
       <entry key="_C:/Users/Rasa/Downloads/service_class-schedule/backend/services/video-service" value="39D7RwgjdGzYKYCeR71HDcebA90" />
     </persistenceIdMap>
   </component>
@@ -82,8 +107,8 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.Application.executor": "Run",
-    "Spring Boot.LmsCourseServiceApplication.executor": "Run",
-    "Spring Boot.LmsPaymentServiceApplication.executor": "Run",
+    "Spring Boot.LmsCourseServiceApplication.executor": "Debug",
+    "Spring Boot.LmsPaymentServiceApplication.executor": "Debug",
     "Spring Boot.LmsQuizServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "quiz-service-dev2-pavani",
@@ -125,53 +150,36 @@
         <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="LmsCourseServiceApplication" value="FAILED" />
+              <entry key="LmsPaymentServiceApplication" value="FAILED" />
+              <entry key="LmsQuizServiceApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.LmsQuizServiceApplication">
-    <configuration name="LmsCourseServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="nsbm.dea.lms.course.LmsCourseServiceApplication" />
-      <module name="course-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nsbm.dea.lms.course.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LmsPaymentServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="nsbm.dea.lms.payment_service.LmsPaymentServiceApplication" />
-      <module name="payment-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nsbm.dea.lms.payment_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="service-class-schedule" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.class_schedule.Application" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LmsCourseServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Java/jdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="course-service" />
+      <module name="LMS_Platform" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.course.LmsCourseServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LmsPaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="LmsPaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Java/jdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="payment-service" />
+      <module name="LMS_Platform" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.payment_service.LmsPaymentServiceApplication" />
       <extension name="coverage">
         <pattern>
@@ -183,20 +191,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LmsQuizServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <configuration name="LmsQuizServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Java/jdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="quiz-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="nsbm.dea.lms.quiz_service.LmsQuizServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.LmsPaymentServiceApplication" />
-        <item itemvalue="Application.LmsCourseServiceApplication" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="Spring Boot.LmsQuizServiceApplication" />
+      <item itemvalue="Spring Boot.LmsCourseServiceApplication" />
+      <item itemvalue="Spring Boot.LmsPaymentServiceApplication" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -217,7 +225,8 @@
       <workItem from="1770524294626" duration="4006000" />
       <workItem from="1771162081908" duration="1714000" />
       <workItem from="1771948396398" duration="1605000" />
-      <workItem from="1772782694320" duration="335000" />
+      <workItem from="1772782694320" duration="5376000" />
+      <workItem from="1772806242133" duration="8941000" />
     </task>
     <servers />
   </component>
