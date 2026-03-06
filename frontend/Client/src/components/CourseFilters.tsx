@@ -1,13 +1,13 @@
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { categories } from "@/lib/data";
 
 interface CourseFiltersProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
-  categories: string[];
 }
 
 const CourseFilters = ({
@@ -15,7 +15,6 @@ const CourseFilters = ({
   setSearchQuery,
   selectedCategory,
   setSelectedCategory,
-  categories,
 }: CourseFiltersProps) => {
   return (
     <div className="mb-8 space-y-4">

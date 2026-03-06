@@ -11,11 +11,11 @@ import java.util.UUID;
 
 @Repository
 public interface ClassesRepository extends JpaRepository <Classes, UUID> {
-    List<Classes> findByCourseIdOrderByPositionAsc(UUID courseId);
+    List<Classes> findByCourseIdOrderByPositionAsc(Long courseId);
 
-    List<Classes> findByCourseIdAndStatusOrderByPositionAsc(UUID courseId, ClassStatus status);
+    List<Classes> findByCourseIdAndStatusOrderByPositionAsc(Long courseId, ClassStatus status);
 
-    List<Classes> findByCourseIdAndStatusAndScheduleOpenTrueOrderByPositionAsc(UUID courseId, ClassStatus status);
+    List<Classes> findByCourseIdAndStatusAndScheduleOpenTrueOrderByPositionAsc(Long courseId, ClassStatus status);
 
-    Optional<Classes> findTopByCourseIdOrderByPositionDesc(UUID courseId);
+    Optional<Classes> findTopByCourseIdOrderByPositionDesc(Long courseId);
 }

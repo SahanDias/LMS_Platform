@@ -15,6 +15,11 @@ export default defineConfig(({ mode }) => ({
         target: "http://localhost:7878",
         changeOrigin: true,
       },
+      "/class-api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/class-api/, "/api"),
+      },
     },
   },
   plugins: [react()],

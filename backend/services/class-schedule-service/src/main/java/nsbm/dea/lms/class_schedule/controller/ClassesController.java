@@ -47,7 +47,7 @@ public class ClassesController {
 
     @GetMapping("/courses/{courseId}/classes")
     public ResponseEntity<List<Classes>> getClassesByCourse(
-            @PathVariable("courseId") UUID courseId,
+            @PathVariable("courseId") Long courseId,
             @RequestParam(value = "status", required = false) ClassStatus status
     ) {
         return ResponseEntity.ok(classesService.getClassesByCourse(courseId, status));
@@ -68,7 +68,7 @@ public class ClassesController {
 
     @PutMapping("/courses/{courseId}/classes/reorder")
     public ResponseEntity<Void> reorderClasses(
-            @PathVariable("courseId") UUID courseId,
+            @PathVariable("courseId") Long courseId,
             @RequestBody List<ReorderItemDTO> items
     ) {
         classesService.reorderClasses(courseId, items);
@@ -76,7 +76,7 @@ public class ClassesController {
     }
 
     @GetMapping("/courses/{courseId}/classes/ordered")
-    public ResponseEntity<List<Classes>> getOrderedClasses(@PathVariable("courseId") UUID courseId) {
+    public ResponseEntity<List<Classes>> getOrderedClasses(@PathVariable("courseId") Long courseId) {
         return ResponseEntity.ok(classesService.getOrderedStudentClasses(courseId));
     }
 }

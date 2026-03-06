@@ -5,7 +5,6 @@ export interface Course {
   instructor: string;
   duration: string;
   lessons: number;
-  price: number;
   category: string;
   level: "Beginner" | "Intermediate" | "Advanced";
   image: string;
@@ -30,7 +29,6 @@ export const courses: Course[] = [
     instructor: "Sarah Johnson",
     duration: "8 weeks",
     lessons: 42,
-    price: 49.99,
     category: "Development",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop",
@@ -44,7 +42,6 @@ export const courses: Course[] = [
     instructor: "Michael Chen",
     duration: "12 weeks",
     lessons: 56,
-    price: 79.99,
     category: "Data Science",
     level: "Intermediate",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop",
@@ -58,7 +55,6 @@ export const courses: Course[] = [
     instructor: "Emily Roberts",
     duration: "6 weeks",
     lessons: 38,
-    price: 59.99,
     category: "Design",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop",
@@ -72,7 +68,6 @@ export const courses: Course[] = [
     instructor: "David Kim",
     duration: "10 weeks",
     lessons: 48,
-    price: 99.99,
     category: "Cloud",
     level: "Advanced",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop",
@@ -86,7 +81,6 @@ export const courses: Course[] = [
     instructor: "Jessica Lee",
     duration: "14 weeks",
     lessons: 62,
-    price: 89.99,
     category: "Development",
     level: "Intermediate",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop",
@@ -100,7 +94,6 @@ export const courses: Course[] = [
     instructor: "Robert Wilson",
     duration: "8 weeks",
     lessons: 44,
-    price: 39.99,
     category: "Security",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop",

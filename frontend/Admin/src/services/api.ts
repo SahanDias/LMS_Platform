@@ -1,67 +1,38 @@
-import { Course, Certification, Quiz, Payment } from "@/types";
+import { Course, Certification, Quiz, Payment, ClassEntity, ClassesDTO, ScheduleDTO, ReorderItemDTO, ClassStatus } from "@/types";
 
 const API_BASE = "/api/v1/course";
-const PAYMENT_API_BASE = "http://localhost:8080";
-
-type BackendCourse = Omit<Course, "isFree"> & {
-  isFree?: boolean;
-  free?: boolean;
-};
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-const normalizeCourse = (course: BackendCourse): Course => ({
-  ...course,
-  price: Number(course.price ?? 0),
-  isFree: Boolean(course.isFree ?? course.free ?? false),
-});
-
-const toBackendCoursePayload = (
-  data: Omit<Course, "id" | "createdBy" | "createdAt" | "updatedAt"> | Partial<Course>
-) => {
-  const payload = { ...data } as Record<string, unknown>;
-  if ("isFree" in payload) {
-    payload.free = Boolean(payload.isFree);
-    delete payload.isFree;
-  }
-  return payload;
-};
 
 // --- COURSES 
 export const coursesApi = {
   getAll: async (): Promise<Course[]> => {
     const res = await fetch(API_BASE);
-    if (!res.ok) {
-      throw new Error("Failed to fetch courses");
-    }
-    const payload = (await res.json()) as BackendCourse[];
-    return Array.isArray(payload) ? payload.map(normalizeCourse) : [];
+    if (!res.ok) throw new Error("Failed to fetch courses");
+    return res.json();
   },
   getById: async (id: number): Promise<Course> => {
     const res = await fetch(`${API_BASE}/getCourse/${id}`);
     if (!res.ok) throw new Error("Course not found");
-    const payload = (await res.json()) as BackendCourse;
-    return normalizeCourse(payload);
+    return res.json();
   },
   create: async (data: Omit<Course, "id" | "createdBy" | "createdAt" | "updatedAt">): Promise<Course> => {
     const res = await fetch(`${API_BASE}/createCourse`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(toBackendCoursePayload(data)),
+      body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("Failed to create course");
-    const payload = (await res.json()) as BackendCourse;
-    return normalizeCourse(payload);
+    return res.json();
   },
   update: async (id: number, data: Partial<Course>): Promise<Course> => {
     const res = await fetch(`${API_BASE}/updateCourse/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(toBackendCoursePayload(data)),
+      body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error("Failed to update course");
-    const payload = (await res.json()) as BackendCourse;
-    return normalizeCourse(payload);
+    return res.json();
   },
   delete: async (id: number): Promise<void> => {
     const res = await fetch(`${API_BASE}/deleteCourse/${id}`, { method: "DELETE" });
@@ -118,117 +89,95 @@ export const quizzesApi = {
 };
 
 // --- PAYMENTS ---
+const payments: Payment[] = [
+  { id: "p1", userId: "u1", userName: "John Doe", userEmail: "john@example.com", courseId: "c1", courseName: "React Masterclass", amount: 79.99, currency: "USD", status: "succeeded", stripePaymentId: "pi_3abc123", method: "Visa •••• 4242", createdAt: "2026-02-08T14:30:00Z" },
+  { id: "p2", userId: "u2", userName: "Jane Smith", userEmail: "jane@example.com", courseId: "c2", courseName: "Python for Data Science", amount: 89.99, currency: "USD", status: "succeeded", stripePaymentId: "pi_3def456", method: "Mastercard •••• 5555", createdAt: "2026-02-07T09:15:00Z" },
+  { id: "p3", userId: "u3", userName: "Mike Johnson", userEmail: "mike@example.com", courseId: "c4", courseName: "DevOps & Cloud Infrastructure", amount: 99.99, currency: "USD", status: "pending", stripePaymentId: "pi_3ghi789", method: "Visa •••• 1234", createdAt: "2026-02-09T16:45:00Z" },
+  { id: "p4", userId: "u4", userName: "Emily Davis", userEmail: "emily@example.com", courseId: "c1", courseName: "React Masterclass", amount: 79.99, currency: "USD", status: "failed", stripePaymentId: "pi_3jkl012", method: "Amex •••• 3782", createdAt: "2026-02-06T11:20:00Z" },
+  { id: "p5", userId: "u5", userName: "Chris Lee", userEmail: "chris@example.com", courseId: "c5", courseName: "Node.js Backend Development", amount: 69.99, currency: "USD", status: "refunded", stripePaymentId: "pi_3mno345", method: "Visa •••• 9876", createdAt: "2026-02-05T08:00:00Z" },
+];
+
 export const paymentsApi = {
-  getAll: async (): Promise<Payment[]> => {
-    try {
-      console.log("Fetching payments from:", `${PAYMENT_API_BASE}/payments`);
-      const res = await fetch(`${PAYMENT_API_BASE}/payments`);
-      console.log("Response status:", res.status);
-      
-      if (!res.ok) {
-        console.error("Failed to fetch payments. Status:", res.status);
-        throw new Error(`Failed to fetch payments: ${res.status}`);
-      }
-      
-      const backendPayments = await res.json();
-      console.log("Raw backend data:", backendPayments);
-      
-      if (!Array.isArray(backendPayments)) {
-        console.error("Backend data is not an array:", backendPayments);
-        return [];
-      }
-      
-      const mapped = backendPayments.map((p: any) => ({
-        id: (p.id ?? 0).toString(),
-        userId: (p.id ?? 0).toString(),
-        userName: p.studentName || "Unknown",
-        userEmail: p.studentEmail || "unknown@example.com",
-        courseId: p.course || "unknown",
-        courseName: p.course || "Unknown Course",
-        amount: p.amount ?? 0,
-        currency: p.currency || "USD",
-        status: p.status || "unknown",
-        stripePaymentId: p.stripeId ||  "Not Available",
-        method: p.paymentMethod && p.cardLast4 ? `${p.paymentMethod} •••• ${p.cardLast4}` : "Not Available",
-        createdAt: p.createdAt || new Date().toISOString(),
-      }));
-      
-      console.log("Mapped payments:", mapped);
-      return mapped;
-    } catch (error) {
-      console.error("Error fetching payments:", error);
-      return [];
-    }
-  },
-  getById: async (id: string): Promise<Payment | undefined> => {
-    const all = await paymentsApi.getAll();
-    return all.find((p) => p.id === id);
-  },
-  delete: async (id: string): Promise<void> => {
-    const res = await fetch(`${PAYMENT_API_BASE}/payments/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || "Failed to delete payment");
-    }
+  getAll: async (): Promise<Payment[]> => { await delay(300); return [...payments]; },
+  getById: async (id: string): Promise<Payment | undefined> => { await delay(200); return payments.find((p) => p.id === id); },
+  refund: async (id: string): Promise<Payment> => {
+    await delay(500);
+    const idx = payments.findIndex((p) => p.id === id);
+    if (idx >= 0) payments[idx] = { ...payments[idx], status: "refunded" };
+    return payments[idx];
   },
 };
 
 // --- DASHBOARD STATS ---
 export const dashboardApi = {
   getStats: async () => {
-    try {
-      console.log("Fetching payment stats from:", `${PAYMENT_API_BASE}/payments/stats`);
-      const statsRes = await fetch(`${PAYMENT_API_BASE}/payments/stats`);
-      console.log("Stats response status:", statsRes.status);
-      
-      if (!statsRes.ok) {
-        console.error("Failed to fetch stats. Status:", statsRes.status);
-        throw new Error("Failed to fetch stats");
-      }
-      
-      const paymentStats = await statsRes.json();
-      console.log("Payment stats:", paymentStats);
-      
-      const allPayments = await paymentsApi.getAll();
-      
-      console.log("All payments count:", allPayments.length);
-      
-      // Try to get courses, but don't fail if unavailable
-      let allCourses: Course[] = [];
-      try {
-        allCourses = await coursesApi.getAll();
-      } catch (error) {
-        console.warn("Course service unavailable");
-      }
-      
-      return {
-        totalCourses: allCourses.length,
-        totalStudents: allPayments.length,
-        totalRevenue: paymentStats.totalRevenue || 0,
-        activeQuizzes: quizzes.filter((q) => q.status === "active").length,
-        recentPayments: allPayments.slice(0, 5),
-        coursesByCategory: [
-          { name: "Frontend", count: 1 },
-          { name: "Backend", count: 1 },
-          { name: "Data Science", count: 1 },
-          { name: "Design", count: 1 },
-          { name: "DevOps", count: 1 },
-        ],
-        monthlyRevenue: [
-          { month: "Sep", revenue: 5200 },
-          { month: "Oct", revenue: 7800 },
-          { month: "Nov", revenue: 6400 },
-          { month: "Dec", revenue: 9100 },
-          { month: "Jan", revenue: 8500 },
-          { month: "Feb", revenue: paymentStats.totalRevenue || 11750 },
-        ],
-        paymentStats: paymentStats,
-      };
-    } catch (error) {
-      console.error("Error fetching dashboard stats:", error);
-      return null;
-    }
+    await delay(300);
+    const allCourses = await coursesApi.getAll();
+    return {
+      totalCourses: allCourses.length,
+      totalStudents: 1468,
+      totalRevenue: 48750.00,
+      activeQuizzes: quizzes.filter((q) => q.status === "active").length,
+      recentPayments: payments.slice(0, 5),
+      coursesByCategory: [
+        { name: "Frontend", count: 1 },
+        { name: "Backend", count: 1 },
+        { name: "Data Science", count: 1 },
+        { name: "Design", count: 1 },
+        { name: "DevOps", count: 1 },
+      ],
+      monthlyRevenue: [
+        { month: "Sep", revenue: 5200 },
+        { month: "Oct", revenue: 7800 },
+        { month: "Nov", revenue: 6400 },
+        { month: "Dec", revenue: 9100 },
+        { month: "Jan", revenue: 8500 },
+        { month: "Feb", revenue: 11750 },
+      ],
+    };
   },
+};
+
+// --- CLASS SCHEDULE SERVICE ---
+const CLASS_API = "/class-api/v1";
+
+async function classApiFetch<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(`${CLASS_API}${url}`, {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.message || body?.error || `Request failed (${res.status})`);
+  }
+  if (res.status === 204) return undefined as T;
+  return res.json();
+}
+
+export const classScheduleApi = {
+  create: (dto: ClassesDTO): Promise<ClassEntity> =>
+    classApiFetch("/classes/create-class", { method: "POST", body: JSON.stringify(dto) }),
+
+  update: (classId: string, dto: Partial<ClassesDTO>): Promise<ClassEntity> =>
+    classApiFetch(`/classes/${classId}`, { method: "PUT", body: JSON.stringify(dto) }),
+
+  delete: (classId: string): Promise<void> =>
+    classApiFetch(`/classes/${classId}`, { method: "DELETE" }),
+
+  getByCourse: (courseId: string, status?: ClassStatus): Promise<ClassEntity[]> => {
+    const qs = status ? `?status=${status}` : "";
+    return classApiFetch(`/courses/${courseId}/classes${qs}`);
+  },
+
+  getSchedule: (classId: string): Promise<ScheduleDTO> =>
+    classApiFetch(`/classes/${classId}/schedule`),
+
+  updateSchedule: (classId: string, dto: ScheduleDTO): Promise<ScheduleDTO> =>
+    classApiFetch(`/classes/${classId}/schedule`, { method: "PUT", body: JSON.stringify(dto) }),
+
+  reorder: (courseId: string, items: ReorderItemDTO[]): Promise<void> =>
+    classApiFetch(`/courses/${courseId}/classes/reorder`, { method: "PUT", body: JSON.stringify(items) }),
+
+  getOrdered: (courseId: string): Promise<ClassEntity[]> =>
+    classApiFetch(`/courses/${courseId}/classes/ordered`),
 };

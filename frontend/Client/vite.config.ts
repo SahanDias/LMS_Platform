@@ -16,10 +16,10 @@ export default defineConfig(({ mode }) => ({
         target: "http://localhost:7878",
         changeOrigin: true,
       },
-      "/payment-api": {
+      "/class-api": {
         target: "http://localhost:8080",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/payment-api/, ""),
+        rewrite: (path) => path.replace(/^\/class-api/, "/api"),
       },
     },
   },
