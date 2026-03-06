@@ -5,9 +5,7 @@ type CreatePaymentSessionParams = {
   amount: number;
 };
 
-const PAYMENT_API_BASE = import.meta.env.DEV
-  ? "/payment-api"
-  : import.meta.env.VITE_PAYMENT_API_BASE_URL?.trim() || "/payment-api";
+const PAYMENT_API_BASE =  "http://localhost:7788";
 
 export const paymentApi = {
   async createPaymentSession(
