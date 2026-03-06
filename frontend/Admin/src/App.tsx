@@ -11,6 +11,7 @@ import CertificationsPage from "./pages/CertificationsPage";
 import QuizzesPage from "./pages/QuizzesPage";
 import PaymentsPage from "./pages/PaymentsPage";
 import NotFound from "./pages/NotFound";
+import QuestionBankPage from "./pages/QuestionBankPage";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,8 @@ const App = () => (
             <Route path="/quizzes" element={<ProtectedRoute><QuizzesPage /></ProtectedRoute>} />
             <Route path="/payments" element={<ProtectedRoute><PaymentsPage /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin/quizzes/:quizId/questions"element={<ProtectedRoute><QuestionBankPage /></ProtectedRoute>}/>
+            <Route path="/admin/quizzes" element={<QuizzesPage />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

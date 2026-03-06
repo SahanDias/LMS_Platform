@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminLayout from "@/components/AdminLayout";
 import StatusBadge from "@/components/StatusBadge";
 import { quizzesApi } from "@/services/api";
@@ -47,6 +48,7 @@ const QuizzesPage = () => {
   const [form, setForm] = useState<QuizForm>(emptyForm);
   const [classList, setClassList] = useState<ClassItem[]>([]);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const load = () => quizzesApi.getAll().then(setQuizzes);
   useEffect(() => {
@@ -307,12 +309,9 @@ const QuizzesPage = () => {
           </div>
 
           <DialogFooter className="flex flex-row items-center justify-end gap-2">
-            {/* ADD THESE 2 BUTTONS ON SAME LINE AS CANCEL AND SAVE */}
-            {/* Create Question should later navigate to /questions/create or your question page */}
-            <Button variant="outline">Create Question</Button>
-
-            {/* Select Question can later open question selector dialog */}
-            <Button variant="outline">Select Question</Button>
+            {/* ADD THESE 2 BUTTONS ON SAME LINE AS CANCEL AND SAVE */}      
+      
+            <Button onClick={() => navigate(`/admin/quizzes/${editing?.id || "new"}/questions`)}>Manage Questions</Button>
 
             <Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button>
 
