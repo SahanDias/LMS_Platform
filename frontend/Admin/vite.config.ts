@@ -35,6 +35,10 @@ export default defineConfig(({ mode }) => ({
         target: "http://localhost:8080",
         changeOrigin: true,
       },
+      "/videos": {
+        target: "http://localhost:8083",
+        changeOrigin: true,
+      },
     },
   },
   plugins: [react()],
