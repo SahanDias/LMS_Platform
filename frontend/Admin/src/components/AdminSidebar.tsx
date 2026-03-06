@@ -1,10 +1,11 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap, Users } from "lucide-react";
+import { LayoutDashboard, BookOpen, Award, HelpCircle, CreditCard, LogOut, GraduationCap, Users, Video } from "lucide-react";
 
 const links = [
   { to: "/", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/courses", icon: BookOpen, label: "Courses" },
+  { to: "/videos", icon: Video, label: "Videos" },
   { to: "/enrollment", icon: Users, label: "Enrollment" },
   { to: "/certifications", icon: Award, label: "Certifications" },
   { to: "/quizzes", icon: HelpCircle, label: "Quizzes" },
@@ -34,11 +35,10 @@ const AdminSidebar = () => {
             <NavLink
               key={to}
               to={to}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive
                   ? "bg-sidebar-accent text-primary"
                   : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-              }`}
+                }`}
             >
               <Icon className="w-4 h-4" />
               {label}

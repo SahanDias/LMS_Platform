@@ -14,6 +14,19 @@ export interface Course {
   updatedAt: string;
 }
 
+export interface Video {
+  id: number;
+  title: string;
+  description: string;
+  videoUrl: string;
+  courseId: number;
+  duration: number; // in minutes
+  isFreePreview: boolean;
+  status: "ACTIVE" | "INACTIVE";
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Certification {
   id: string;
   title: string;
