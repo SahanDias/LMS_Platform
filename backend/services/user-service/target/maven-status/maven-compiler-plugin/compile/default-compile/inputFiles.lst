@@ -1,0 +1,16 @@
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\config\JwtAuthenticationFilter.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\config\SecurityConfig.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\controller\AuthController.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\controller\UserController.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\dto\AuthResponse.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\dto\LoginRequest.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\dto\RegisterRequest.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\dto\UserDTO.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\entity\Role.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\entity\User.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\exception\GlobalExceptionHandler.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\LmsUserServiceApplication.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\repository\UserRepository.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\service\AuthService.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\service\JwtService.java
+D:\github\LMS_Platform\backend\services\user-service\src\main\java\nsbm\dea\lms\user\service\UserDetailsServiceImpl.java
