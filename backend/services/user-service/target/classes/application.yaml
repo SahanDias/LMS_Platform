@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: LMS User Service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/lms_user_service
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 7879
+
+jwt:
+  secret: LMS_Platform_JWT_Secret_Key_2024_nsbm_dea_must_be_at_least_256_bits_long
+  expiration: 86400000
