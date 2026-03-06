@@ -8,7 +8,6 @@ import nsbm.dea.lms.class_schedule.dto.ScheduleDTO;
 import nsbm.dea.lms.class_schedule.entity.Classes;
 import nsbm.dea.lms.class_schedule.exception.ResourceNotFoundException;
 import nsbm.dea.lms.class_schedule.repository.ClassesRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 public class ClassesService {
 
     private final ClassesRepository classesRepository;
-    private final ModelMapper modelMapper;
 
     public Classes createClass(ClassesDTO dto) {
         Classes classes = new Classes();
