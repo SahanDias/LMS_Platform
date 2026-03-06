@@ -1,0 +1,46 @@
+services:
+  course-service-db:
+    image: mysql:8.0
+    container_name: course-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_course_service
+    ports:
+      - "3306:3306"
+    volumes:
+      - course-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  course-service:
+    build: ./backend/services/course-service
+    container_name: course-service
+    ports:
+      - "7878:7878"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://course-service-db:3306/lms_course_service
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+    depends_on:
+      course-service-db:
+        condition: service_healthy
+
+  admin-frontend:
+    build: ./frontend/Admin
+    container_name: admin-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - course-service
+
+  client-frontend:
+    build: ./frontend/Client
+    container_name: client-frontend
+    ports:
+      - "8081:8081"
+
+volumes:
+  course-service-db-data:
