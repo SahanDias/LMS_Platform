@@ -18,3 +18,8 @@ stripe:
     key: pk_test_51Ryrc6COpaj22Bl7Uoutadw4ok0QCFrk9vJsL0cTS7ZpOSVFWLKrVxvTrui2UYmr7UlCqD3pvjX7cC9SRVZFjXHE00mUr0RtX0
   webhook:
     secret: whsec_10b29dba1ad8015404d6b08950d89333464dcbdb288b9448a7951441bdc66c06  # Replace with your actual webhook endpoint secret
+
+
+
+server:
+  port: 7788
