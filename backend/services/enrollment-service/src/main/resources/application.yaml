@@ -16,15 +16,15 @@ spring:
         format_sql: true
 
 server:
-  port: 8082
+  port: 8084
 
 # External service URLs. Course service is the source of course data (port 8081).
 services:
   course:
-    base-url: http://localhost:8081
+    base-url: http://localhost:7878
   class:
-    base-url: http://localhost:8083
+    base-url: http://localhost:8080
   payment:
-    base-url: http://localhost:8084
+    base-url: http://localhost:7788
   progress:
-    base-url: http://localhost:8084
+    base-url: http://localhost:9000

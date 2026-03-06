@@ -1,7 +1,7 @@
 import { Course, Certification, Quiz, Payment } from "@/types";
 
 const API_BASE = "/api/v1/course";
-const PAYMENT_API_BASE = "http://localhost:8080";
+const PAYMENT_API_BASE = "";
 
 type BackendCourse = Omit<Course, "isFree"> & {
   isFree?: boolean;
