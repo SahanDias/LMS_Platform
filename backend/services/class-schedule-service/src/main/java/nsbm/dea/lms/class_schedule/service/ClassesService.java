@@ -119,7 +119,7 @@ public class ClassesService {
     }
 
     public List<Classes> getOrderedStudentClasses(Long courseId) {
-        return classesRepository.findByCourseIdAndStatusAndScheduleOpenTrueOrderByPositionAsc(
+        return classesRepository.findByCourseIdAndStatusOrderByPositionAsc(
                 courseId,
                 ClassStatus.PUBLISHED
         );
