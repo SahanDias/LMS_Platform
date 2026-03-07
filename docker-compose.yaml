@@ -41,7 +41,7 @@ services:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: lms_class_schedule_service
     ports:
-      - "3308:3306"
+      - "3311:3306"
     volumes:
       - class-schedule-service-db-data:/var/lib/mysql
     healthcheck:
@@ -85,6 +85,45 @@ services:
       timeout: 5s
       retries: 10
 
+  # =========================
+  # NOTIFICATION SERVICE
+  # =========================
+  notification-service-db:
+    image: mysql:8.0
+    container_name: notification-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_notification_service
+    ports:
+      - "3310:3306"
+    volumes:
+      - notification-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  notification-service:
+    build: ./backend/services/notification-service
+    container_name: notification-service
+    ports:
+      - "7880:7880"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://notification-service-db:3306/lms_notification_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      EXTERNAL_NOTIFICATIONS_COURSE_URL: http://course-service:7878/api/courses/completions
+      EXTERNAL_NOTIFICATIONS_PAYMENT_URL: http://payment-service:8080/payments
+    depends_on:
+      notification-service-db:
+        condition: service_healthy
+      course-service:
+        condition: service_started
+
+  # =========================
+  # USER SERVICE
+  # =========================
   user-service-db:
     image: mysql:8.0
     container_name: user-service-db
@@ -122,6 +161,18 @@ services:
     depends_on:
       - user-service
 
+  admin-frontend:
+    build: ./frontend/Admin
+    container_name: admin-frontend
+    ports:
+      - "3001:8080"
+    depends_on:
+      - course-service
+      - notification-service
+
 volumes:
   course-service-db-data:
+  class-schedule-service-db-data:
+  enrollment-service-db-data:
+  notification-service-db-data:
   user-service-db-data:
