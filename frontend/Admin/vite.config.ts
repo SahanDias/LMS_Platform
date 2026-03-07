@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
       },
       "/class-api": {
-        target: "http://localhost:8080",
+        target: "http://localhost:8081",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/class-api/, "/api"),
       },
