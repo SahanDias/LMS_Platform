@@ -10,6 +10,8 @@ public class QuizSummaryResponse {
     private String quizName;
     private Integer timeLimitMinutes;
     private Integer questionCount;
+    private Integer passingPercentage;
+    private String status;
 
     public QuizSummaryResponse() { }
 
@@ -53,6 +55,22 @@ public class QuizSummaryResponse {
         this.questionCount = questionCount;
     }
 
+    public Integer getPassingPercentage() {
+        return passingPercentage;
+    }
+
+    public void setPassingPercentage(Integer passingPercentage) {
+        this.passingPercentage = passingPercentage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "QuizSummaryResponse{" +
@@ -60,6 +78,8 @@ public class QuizSummaryResponse {
                 ", quizName='" + quizName + '\'' +
                 ", timeLimitMinutes=" + timeLimitMinutes +
                 ", questionCount=" + questionCount +
+                ", passingPercentage=" + passingPercentage +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

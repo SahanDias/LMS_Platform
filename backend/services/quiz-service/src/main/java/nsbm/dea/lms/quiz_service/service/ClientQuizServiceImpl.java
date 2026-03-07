@@ -26,7 +26,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /*
   Implements ClientQuizService
@@ -62,12 +66,32 @@ public class ClientQuizServiceImpl implements ClientQuizService {
         List<QuizSummaryResponse> responseList = new ArrayList<>();
 
         for (Quiz quiz : quizzes) {
-            QuizSummaryResponse dto = new QuizSummaryResponse(
-                    quiz.getQuizId(),
-                    quiz.getQuizName(),
-                    quiz.getTimeLimitMinutes(),
-                    quiz.getQuestionCount()
-            );
+            int mappedQuestionCount;
+            if (quiz.getQuestionCount() != null && quiz.getQuestionCount() > 0) {
+                mappedQuestionCount = quiz.getQuestionCount();
+            } else {
+                List<QuizQuestion> mappings = quizQuestionRepository.findByQuizId(quiz.getQuizId());
+                Set<Long> mappedQuestionIds = new LinkedHashSet<>();
+                for (QuizQuestion mapping : mappings) {
+                    if (mapping.getQuestionId() != null) {
+                        mappedQuestionIds.add(mapping.getQuestionId());
+                    }
+                }
+
+                if (mappedQuestionIds.isEmpty()) {
+                    mappedQuestionCount = 0;
+                } else {
+                    mappedQuestionCount = questionRepository.findAllById(mappedQuestionIds).size();
+                }
+            }
+
+            QuizSummaryResponse dto = new QuizSummaryResponse();
+            dto.setQuizId(quiz.getQuizId());
+            dto.setQuizName(quiz.getQuizName());
+            dto.setTimeLimitMinutes(quiz.getTimeLimitMinutes() != null ? quiz.getTimeLimitMinutes() : 0);
+            dto.setQuestionCount(mappedQuestionCount);
+            dto.setPassingPercentage(quiz.getPassingScore() != null ? quiz.getPassingScore() : 0);
+            dto.setStatus(quiz.getStatus() != null ? quiz.getStatus().name() : QuizStatus.INACTIVE.name());
             responseList.add(dto);
         }
 
@@ -99,15 +123,34 @@ public class ClientQuizServiceImpl implements ClientQuizService {
         }
 
         Collections.shuffle(quizQuestions);
+        Set<Long> mappedQuestionIds = new LinkedHashSet<>();
+        for (QuizQuestion qq : quizQuestions) {
+            if (qq.getQuestionId() != null) {
+                mappedQuestionIds.add(qq.getQuestionId());
+            }
+        }
+        if (mappedQuestionIds.isEmpty()) {
+            throw new BadRequestException("No valid questions assigned to this quiz.");
+        }
+
+        Map<Long, Question> questionsById = new HashMap<>();
+        for (Question question : questionRepository.findAllById(mappedQuestionIds)) {
+            questionsById.put(question.getQuestionId(), question);
+        }
 
         List<QuestionViewResponse> questionResponses = new ArrayList<>();
 
         for (QuizQuestion qq : quizQuestions) {
 
             Long questionId = qq.getQuestionId();
+            if (questionId == null) {
+                continue;
+            }
 
-            Question question = questionRepository.findById(questionId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Question not found: " + questionId));
+            Question question = questionsById.get(questionId);
+            if (question == null) {
+                continue;
+            }
 
             List<Answer> answers = answerRepository.findByQuestionQuestionId(questionId);
 
@@ -126,6 +169,10 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             );
 
             questionResponses.add(questionDto);
+        }
+
+        if (questionResponses.isEmpty()) {
+            throw new BadRequestException("No valid questions assigned to this quiz.");
         }
 
         StartQuizResponse response = new StartQuizResponse();
@@ -175,7 +222,9 @@ public class ClientQuizServiceImpl implements ClientQuizService {
         Long studentId = request.getStudentId();
 
         long usedAttempts = quizAttemptRepository.countByQuizIdAndStudentId(quizId, studentId);
-        int allowedAttempts = quiz.getAttemptCount() != null ? quiz.getAttemptCount() : 1;
+        int allowedAttempts = (quiz.getAttemptCount() != null && quiz.getAttemptCount() > 0)
+                ? quiz.getAttemptCount()
+                : 1;
 
         if (usedAttempts >= allowedAttempts) {
             throw new BadRequestException("Maximum attempts reached for this quiz.");
@@ -199,7 +248,22 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             throw new BadRequestException("No questions assigned to this quiz.");
         }
 
-        int totalQuestions = selectedQuestions.size();
+        Set<Long> validQuestionIds = new LinkedHashSet<>();
+        Set<Long> mappedQuestionIds = new LinkedHashSet<>();
+        for (QuizQuestion selectedQuestion : selectedQuestions) {
+            if (selectedQuestion.getQuestionId() != null) {
+                mappedQuestionIds.add(selectedQuestion.getQuestionId());
+            }
+        }
+        for (Question question : questionRepository.findAllById(mappedQuestionIds)) {
+            validQuestionIds.add(question.getQuestionId());
+        }
+
+        if (validQuestionIds.isEmpty()) {
+            throw new BadRequestException("No valid questions assigned to this quiz.");
+        }
+
+        int totalQuestions = validQuestionIds.size();
 
         if (request.getAnswers().size() > totalQuestions) {
             throw new BadRequestException("Too many answers submitted.");
@@ -222,7 +286,7 @@ public class ClientQuizServiceImpl implements ClientQuizService {
             }
             seenQuestions.add(questionId);
 
-            boolean questionInQuiz = quizQuestionRepository.existsByQuizIdAndQuestionId(quizId, questionId);
+            boolean questionInQuiz = validQuestionIds.contains(questionId);
             if (!questionInQuiz) {
                 throw new BadRequestException("Question " + questionId + " does not belong to quiz " + quizId);
             }

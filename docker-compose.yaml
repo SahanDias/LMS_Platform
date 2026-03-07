@@ -66,6 +66,39 @@ services:
       course-service:
         condition: service_started
 
+  # =========================
+  # QUIZ SERVICE
+  # =========================
+  quiz-service-db:
+    image: mysql:8.0
+    container_name: quiz-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_quiz_service
+    ports:
+      - "3309:3306"
+    volumes:
+      - quiz-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  quiz-service:
+    build: ./backend/services/quiz-service
+    container_name: quiz-service
+    ports:
+      - "8093:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://quiz-service-db:3306/lms_quiz_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+    depends_on:
+      quiz-service-db:
+        condition: service_healthy
+
 volumes:
   course-service-db-data:
   class-schedule-service-db-data:
+  quiz-service-db-data:

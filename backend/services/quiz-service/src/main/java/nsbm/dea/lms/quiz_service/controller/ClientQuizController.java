@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/client/quizzes")
-@CrossOrigin(origins = "http://localhost:5173") // React dev server
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 public class ClientQuizController {
 
     private final ClientQuizService clientQuizService;

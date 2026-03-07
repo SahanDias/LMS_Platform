@@ -22,4 +22,6 @@ public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Long
     // Validation method
     boolean existsByQuizIdAndQuestionId(Long quizId, Long questionId);
 
+    long countByQuizId(Long quizId);
+
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/quizzes")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 public class QuizController {
 
     // DEPENDENCY
