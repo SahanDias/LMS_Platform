@@ -1,7 +1,8 @@
-import { Course, Certification, Quiz, Payment } from "@/types";
+import { Course, Certification, Quiz, Payment, Video } from "@/types";
 
 const API_BASE = "/api/v1/course";
 const PAYMENT_API_BASE = "";
+const VIDEO_API_BASE = "/videos";
 
 type BackendCourse = Omit<Course, "isFree"> & {
   isFree?: boolean;
@@ -69,6 +70,43 @@ export const coursesApi = {
   },
 };
 
+// --- VIDEOS ---
+export const videosApi = {
+  getAll: async (): Promise<Video[]> => {
+    const res = await fetch(VIDEO_API_BASE);
+    if (!res.ok) throw new Error("Failed to fetch videos");
+    const payload = await res.json();
+    return Array.isArray(payload) ? payload : [];
+  },
+  getById: async (id: number): Promise<Video> => {
+    const res = await fetch(`${VIDEO_API_BASE}/${id}`);
+    if (!res.ok) throw new Error("Video not found");
+    return await res.json();
+  },
+  create: async (data: Omit<Video, "id" | "createdAt" | "updatedAt">): Promise<Video> => {
+    const res = await fetch(`${VIDEO_API_BASE}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("Failed to create video");
+    return await res.json();
+  },
+  update: async (id: number, data: Partial<Video>): Promise<Video> => {
+    const res = await fetch(`${VIDEO_API_BASE}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error("Failed to update video");
+    return await res.json();
+  },
+  delete: async (id: number): Promise<void> => {
+    const res = await fetch(`${VIDEO_API_BASE}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Failed to delete video");
+  },
+};
+
 // --- CERTIFICATIONS ---
 let certifications: Certification[] = [
   { id: "cert1", title: "React Developer Certified", courseId: "c1", courseName: "React Masterclass", issuedTo: "John Doe", issuedAt: "2026-01-15", expiresAt: "2027-01-15", status: "active" },
@@ -124,20 +162,20 @@ export const paymentsApi = {
       console.log("Fetching payments from:", `${PAYMENT_API_BASE}/payments`);
       const res = await fetch(`${PAYMENT_API_BASE}/payments`);
       console.log("Response status:", res.status);
-      
+
       if (!res.ok) {
         console.error("Failed to fetch payments. Status:", res.status);
         throw new Error(`Failed to fetch payments: ${res.status}`);
       }
-      
+
       const backendPayments = await res.json();
       console.log("Raw backend data:", backendPayments);
-      
+
       if (!Array.isArray(backendPayments)) {
         console.error("Backend data is not an array:", backendPayments);
         return [];
       }
-      
+
       const mapped = backendPayments.map((p: any) => ({
         id: (p.id ?? 0).toString(),
         userId: (p.id ?? 0).toString(),
@@ -148,11 +186,11 @@ export const paymentsApi = {
         amount: p.amount ?? 0,
         currency: p.currency || "USD",
         status: p.status || "unknown",
-        stripePaymentId: p.stripeId ||  "Not Available",
+        stripePaymentId: p.stripeId || "Not Available",
         method: p.paymentMethod && p.cardLast4 ? `${p.paymentMethod} •••• ${p.cardLast4}` : "Not Available",
         createdAt: p.createdAt || new Date().toISOString(),
       }));
-      
+
       console.log("Mapped payments:", mapped);
       return mapped;
     } catch (error) {
@@ -209,19 +247,19 @@ export const dashboardApi = {
       console.log("Fetching payment stats from:", `${PAYMENT_API_BASE}/payments/stats`);
       const statsRes = await fetch(`${PAYMENT_API_BASE}/payments/stats`);
       console.log("Stats response status:", statsRes.status);
-      
+
       if (!statsRes.ok) {
         console.error("Failed to fetch stats. Status:", statsRes.status);
         throw new Error("Failed to fetch stats");
       }
-      
+
       const paymentStats = await statsRes.json();
       console.log("Payment stats:", paymentStats);
-      
+
       const allPayments = await paymentsApi.getAll();
-      
+
       console.log("All payments count:", allPayments.length);
-      
+
       // Try to get courses, but don't fail if unavailable
       let allCourses: Course[] = [];
       try {
@@ -229,7 +267,7 @@ export const dashboardApi = {
       } catch (error) {
         console.warn("Course service unavailable");
       }
-      
+
       return {
         totalCourses: allCourses.length,
         totalStudents: allPayments.length,

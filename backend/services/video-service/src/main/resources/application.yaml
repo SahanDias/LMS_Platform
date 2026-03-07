@@ -1,8 +1,11 @@
+server:
+  port: 8083
+
 spring:
   application:
     name: video-service
   datasource:
-    url: jdbc:mysql://localhost:3306/video_service_db
+    url: jdbc:mysql://video-service-db.czussyky8e0l.eu-north-1.rds.amazonaws.com:3306/video_service_db?allowPublicKeyRetrieval=true&useSSL=false
     username: video_user
     password: video123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,3 +24,7 @@ enrollment:
 progress:
   service:
     url: http://localhost:8082
+
+contentflow:
+  service:
+    url: http://localhost:8084
