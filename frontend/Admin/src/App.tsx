@@ -7,9 +7,12 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import CoursesPage from "./pages/CoursesPage";
+import VideosPage from "./pages/VideosPage";
+import EnrollmentPage from "./pages/EnrollmentPage";
 import CertificationsPage from "./pages/CertificationsPage";
 import QuizzesPage from "./pages/QuizzesPage";
 import PaymentsPage from "./pages/PaymentsPage";
+import NotificationsPage from "./pages/NotificationsPage";
 import NotFound from "./pages/NotFound";
 import QuestionBankPage from "./pages/QuestionBankPage";
 
@@ -25,15 +28,18 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/courses" element={<ProtectedRoute><CoursesPage /></ProtectedRoute>} />
+            <Route path="/videos" element={<ProtectedRoute><VideosPage /></ProtectedRoute>} />
+            <Route path="/enrollment" element={<ProtectedRoute><EnrollmentPage /></ProtectedRoute>} />
             <Route path="/certifications" element={<ProtectedRoute><CertificationsPage /></ProtectedRoute>} />
             <Route path="/quizzes" element={<ProtectedRoute><QuizzesPage /></ProtectedRoute>} />
             <Route path="/payments" element={<ProtectedRoute><PaymentsPage /></ProtectedRoute>} />
+            <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="/admin/quizzes/:quizId/questions"element={<ProtectedRoute><QuestionBankPage /></ProtectedRoute>}/>
             <Route path="/admin/quizzes" element={<QuizzesPage />} />

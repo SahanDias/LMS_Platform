@@ -10,13 +10,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 const Dashboard = () => {
   const [stats, setStats] = useState<Awaited<ReturnType<typeof dashboardApi.getStats>> | null>(null);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
-    dashboardApi.getStats().then(setStats).catch(() => setError(true));
+    dashboardApi.getStats().then(setStats);
   }, []);
 
-  if (error) return <AdminLayout><div className="flex items-center justify-center h-64 text-destructive">Failed to load dashboard data.</div></AdminLayout>;
   if (!stats) return <AdminLayout><div className="flex items-center justify-center h-64 text-muted-foreground">Loading...</div></AdminLayout>;
 
   return (

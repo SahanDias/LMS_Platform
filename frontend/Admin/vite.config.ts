@@ -11,8 +11,32 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
     proxy: {
-      "/api": {
+      "/api/v1/course": {
         target: "http://localhost:7878",
+        changeOrigin: true,
+      },
+      "/api/enrollments": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+      },
+      "/api/waitlist": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+      },
+      "/api/catalog": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+      },
+      "/payments": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/create-payment-session": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/videos": {
+        target: "http://localhost:8083",
         changeOrigin: true,
       },
     },
