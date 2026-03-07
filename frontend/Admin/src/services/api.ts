@@ -213,6 +213,33 @@ export const paymentsApi = {
   },
 };
 
+// --- NOTIFICATIONS ---
+export interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  badgeLabel: string;
+  type: "COMPLETION" | "PAYMENT";
+  timestamp: string;
+  read: boolean;
+}
+
+const NOTIFICATION_API_BASE = "http://localhost:7880/api/notifications";
+
+export const notificationsApi = {
+  getAll: async (type?: string): Promise<Notification[]> => {
+    const url = type && type !== "ALL" ? `${NOTIFICATION_API_BASE}?type=${type}` : NOTIFICATION_API_BASE;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Failed to fetch notifications");
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  },
+  sync: async (): Promise<void> => {
+    const res = await fetch(`${NOTIFICATION_API_BASE}/sync`);
+    if (!res.ok) throw new Error("Failed to sync notifications");
+  },
+};
+
 // --- DASHBOARD STATS ---
 export const dashboardApi = {
   getStats: async () => {
