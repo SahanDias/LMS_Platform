@@ -5,18 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-<<<<<<< HEAD
-		<version>3.2.2</version>
-=======
-		<version>3.2.3</version>
->>>>>>> 0053d0f2972ba09fa15dbe4c15d990c4d294d2ee
+		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>nsbm.dea.lms</groupId>
-	<artifactId>video-service</artifactId>
+	<artifactId>quiz-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LMS Video Service</name>
-	<description>Spring Boot microservice for LMS platform. Responsible for video management. Developed by Pasindu</description>
+	<name>LMS Quiz Service</name>
+	<description>Spring Boot microservice for LMS platform. Responsible for Quiz Management. Developed by Pavani Nisansala </description>
 	<url/>
 	<licenses>
 		<license/>
@@ -45,15 +41,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-<<<<<<< HEAD
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-=======
->>>>>>> 0053d0f2972ba09fa15dbe4c15d990c4d294d2ee
 		</dependency>
 
 		<dependency>
@@ -66,19 +53,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-<<<<<<< HEAD
-=======
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
+			<version>9.6.0</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
->>>>>>> 0053d0f2972ba09fa15dbe4c15d990c4d294d2ee
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 	</dependencies>
 
