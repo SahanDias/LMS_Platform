@@ -2,7 +2,9 @@ package nsbm.dea.lms.progress_service.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,7 +13,8 @@ import java.time.LocalDateTime;
 @Table(name = "courses")
 @AllArgsConstructor
 @NoArgsConstructor
-public class  Course {
+@Data
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +22,7 @@ public class  Course {
     private String title;
     private String description;
     private String thumbnailImgUrl;
-    private BigDecimal price;
+    private double price;
     private int passingPercentage;
     private boolean certificationEnabled;
     private String status;

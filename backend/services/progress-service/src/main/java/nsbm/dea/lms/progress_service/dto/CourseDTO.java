@@ -16,7 +16,7 @@ public class CourseDTO {
     private String title;
     private String description;
     private String thumbnailImgUrl;
-    private BigDecimal price;
+    private double price;
     private int passingPercentage;
     private boolean certificationEnabled;
     private String status;
