@@ -1,0 +1,178 @@
+services:
+  # =========================
+  # COURSE SERVICE
+  # =========================
+  course-service-db:
+    image: mysql:8.0
+    container_name: course-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_course_service
+    ports:
+      - "3308:3306"
+    volumes:
+      - course-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  course-service:
+    build: ./backend/services/course-service
+    container_name: course-service
+    ports:
+      - "7878:7878"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://course-service-db:3306/lms_course_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+    depends_on:
+      course-service-db:
+        condition: service_healthy
+
+  # =========================
+  # CLASS SCHEDULE SERVICE
+  # =========================
+  class-schedule-service-db:
+    image: mysql:8.0
+    container_name: class-schedule-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_class_schedule_service
+    ports:
+      - "3311:3306"
+    volumes:
+      - class-schedule-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  class-schedule-service:
+    build: ./backend/services/class-schedule-service
+    container_name: class-schedule-service
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://class-schedule-service-db:3306/lms_class_schedule_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SERVICES_COURSE_BASEURL: http://course-service:7878
+    depends_on:
+      class-schedule-service-db:
+        condition: service_healthy
+      course-service:
+        condition: service_started
+
+  # =========================
+  # ENROLLMENT SERVICE
+  # =========================
+  enrollment-service-db:
+    image: mysql:8.0
+    container_name: enrollment-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_enrollment_service
+    ports:
+      - "3309:3306"
+    volumes:
+      - enrollment-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # =========================
+  # NOTIFICATION SERVICE
+  # =========================
+  notification-service-db:
+    image: mysql:8.0
+    container_name: notification-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_notification_service
+    ports:
+      - "3310:3306"
+    volumes:
+      - notification-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p12345"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  notification-service:
+    build: ./backend/services/notification-service
+    container_name: notification-service
+    ports:
+      - "7880:7880"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://notification-service-db:3306/lms_notification_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      EXTERNAL_NOTIFICATIONS_COURSE_URL: http://course-service:7878/api/courses/completions
+      EXTERNAL_NOTIFICATIONS_PAYMENT_URL: http://payment-service:8080/payments
+    depends_on:
+      notification-service-db:
+        condition: service_healthy
+      course-service:
+        condition: service_started
+
+  # =========================
+  # USER SERVICE
+  # =========================
+  user-service-db:
+    image: mysql:8.0
+    container_name: user-service-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: lms_user_service
+    ports:
+      - "3307:3306"
+    volumes:
+      - user-service-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  user-service:
+    build: ./backend/services/user-service
+    container_name: user-service
+    ports:
+      - "7879:7879"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://user-service-db:3306/lms_user_service
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+    depends_on:
+      user-service-db:
+        condition: service_healthy
+
+  client-frontend:
+    build: ./frontend/Client
+    container_name: client-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - user-service
+
+  admin-frontend:
+    build: ./frontend/Admin
+    container_name: admin-frontend
+    ports:
+      - "3001:8080"
+    depends_on:
+      - course-service
+      - notification-service
+
+volumes:
+  course-service-db-data:
+  class-schedule-service-db-data:
+  enrollment-service-db-data:
+  notification-service-db-data:
+  user-service-db-data:

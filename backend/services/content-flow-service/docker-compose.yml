@@ -1,0 +1,23 @@
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: lms-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lms_content
+    ports:
+      - "3307:3306"
+
+  content-service:
+    build: .
+    container_name: content-service
+    depends_on:
+      - mysql
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/lms_content
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
